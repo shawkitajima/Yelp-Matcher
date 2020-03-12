@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom';
+import userService from '../../utils/userService';
 import './App.css';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
-import userService from '../../utils/userService';
-import NavBar from '../../components/NavBar/NavBar';
+import WelcomePage from '../WelcomePage/WelcomePage';
+import UserPage from '../UserPage/UserPage';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: userService.getUser()
+      user: userService.getUser(),
+      refresh: false
     };
   }
 
@@ -23,24 +25,34 @@ class App extends Component {
   handleSignupOrLogin = () => {
     this.setState({user: userService.getUser()})
   }
+
+  handleUserUpdate = (data) => {
+    this.setState({user: data});
+  }
+
+
   /*--- Lifecycle Methods ---*/
+
 
   render() {
     return (
       <div>
-        <NavBar 
-        user={this.state.user} 
-        handleLogout={this.handleLogout}
-        />
         <Switch>
-          <Route exact path='/' render={() =>
-           <div>Hello World!</div> 
+          <Route exact path='/' render={() => (
+            userService.getUser() ?
+            <Router><UserPage 
+              user={this.state.user} 
+              handleLogout={this.handleLogout}
+              handleUserUpdate={this.handleUserUpdate}
+            /></Router>
+            :
+           <Redirect to='/welcome' />
+          )
           }/>
           <Route exact path='/signup' render={({ history }) => 
             <SignupPage
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
-              
             />
           }/>
           <Route exact path='/login' render={({history}) => 
@@ -48,6 +60,9 @@ class App extends Component {
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
+          }/>
+          <Route exact path='/welcome' render={() => 
+            <WelcomePage/>
           }/>
         </Switch>
       </div>
