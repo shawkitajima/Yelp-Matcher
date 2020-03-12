@@ -2,4 +2,39 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: black;
+    color: white;
+}
+
+
+    
+.imgStyle {
+    width: 100%;
+    height: 40rem;
+    background-size: cover;
+    background-position: center;
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+.exp {
+    margin: 0 15rem;
+    text-align: center;
+}
+
+.row > div {
+    margin: 0 2rem;
+    height: 2rem;
+    margin-top: 0.5rem;
+    font-weight: 800;
+}
+
+.welcomePageBtn {
+    height: 2rem;
+    width: 5rem;
+    font-weight: 800;
 }
