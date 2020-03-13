@@ -5,18 +5,15 @@ module.exports = {
     detail
 }
 
-// function restaurants(req, res) {
-//     res.send('yolo swag')
-// }
-
 function restaurants(req, res) {
+    console.log(req.body);
     const headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + process.env.YELP_KEY 
     };
     const options = {
-        url: `https://api.yelp.com/v3/businesses/search?term=restaurants&latitude=32.8564736&longitude=-117.22752&open_now=true`,
+        url: `https://api.yelp.com/v3/businesses/search?term=restaurants&latitude=${req.body.lat}&longitude=${req.body.long}&open_now=true&limit=50&offset=${req.body.offset}`,
         headers: headers
     };
     function callback(error, response, body) {
