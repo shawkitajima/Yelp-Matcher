@@ -1,0 +1,11 @@
+.imgStyle {
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    max-height: 30rem;
+}
+
+.imgContainer {
+    width: 50rem;
+}

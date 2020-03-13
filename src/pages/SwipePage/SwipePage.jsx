@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { usePosition} from 'use-position';
 import restaurantService from '../../utils/restaurantService';
+import Swipe from '../../components/Swipe/Swipe';
 
 const SwipePage = props => {
 
-    const { latitude, longitude } = usePosition(true);
+    const { latitude, longitude } = usePosition();
 
     const [rests, setRests] = useState([{}]);
 
@@ -28,7 +29,7 @@ const SwipePage = props => {
     return (
         <div>
             <h1>It's Swiping Time</h1>
-            <h2>{rests[resIdx].id}</h2>
+            <Swipe id={rests[resIdx].id} />
             <button onClick={() => goNext()}>Next</button>
         </div>
     )
