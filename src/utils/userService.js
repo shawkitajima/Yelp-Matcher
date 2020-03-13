@@ -5,7 +5,8 @@ export default {
     signup,
     getUser,
     logout,
-    login
+    login,
+    like
   };
 
 
@@ -44,4 +45,11 @@ function signup(user) {
     .then(({token}) => tokenService.setToken(token));
   }
   
-  
+  function like(id, rest) {
+    return fetch(BASE_URL + 'like', {
+      method: 'POST',
+      headers: new Headers({'Content-Type': 'application/json'}),
+      body: JSON.stringify({id, rest})
+    })
+    .then(res => res.json());
+  }

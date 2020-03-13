@@ -80,7 +80,7 @@ const UserPage = props => {
         <main className={classes.content}>
             <Switch>
                 <Route exact path='/' render={() => (
-                    <SwipePage />
+                    <SwipePage user={props.user}/>
                 )
                 }/>
                 <Route exact path='/likes' render={() => (

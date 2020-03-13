@@ -4,7 +4,8 @@ const SECRET = process.env.SECRET;
 
 module.exports = {
   signup,
-  login
+  login,
+  like
 };
 
 async function signup(req, res) {
@@ -35,6 +36,17 @@ async function login(req, res) {
   } catch (err) {
     return res.status(401).json(err);
   }
+}
+
+function like(req, res) {
+  console.log(req.body);
+  User.findById(req.body.id, function(err, user) {
+    let likes = user.likes;
+    likes.push(req.body.rest);
+    User.findByIdAndUpdate(req.body.id, {likes}, {new: true}, function(err, newUser) {
+      res.send(newUser);
+    });
+  });
 }
 
 // Make helper functions for JWT
