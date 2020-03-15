@@ -6,6 +6,9 @@ const usersCtrl = require('../../controllers/users');
 router.post('/signup', usersCtrl.signup);
 router.post('/login', usersCtrl.login);
 router.post('/like', usersCtrl.like);
+router.post('/see', usersCtrl.see);
+router.get('/likes/:id', usersCtrl.getLikes);
+router.get('/seen/:id', usersCtrl.getSeen);
 
 
 /*---------- Protected Routes ----------*/

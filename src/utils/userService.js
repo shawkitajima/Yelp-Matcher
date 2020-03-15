@@ -6,50 +6,69 @@ export default {
     getUser,
     logout,
     login,
-    like
+    like,
+    getLikes,
+    see,
+    getSeen,
   };
 
 
 function signup(user) {
-    return fetch(BASE_URL + 'signup', {
-      method: 'POST',
-      headers: new Headers({'Content-Type': 'application/json'}),
-      body: JSON.stringify(user)
-    })
-    .then(res => {
-      if (res.ok) return res.json();
-      // Probably a duplicate email
-      throw new Error('Email already taken!');
-    })
-    .then(({token}) => tokenService.setToken(token));
-  }
+  return fetch(BASE_URL + 'signup', {
+    method: 'POST',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify(user)
+  })
+  .then(res => {
+    if (res.ok) return res.json();
+    // Probably a duplicate email
+    throw new Error('Email already taken!');
+  })
+  .then(({token}) => tokenService.setToken(token));
+}
   
-  function getUser() {
-    return tokenService.getUserFromToken();
-  }
+function getUser() {
+  return tokenService.getUserFromToken();
+}
   
-  function logout() {
-    tokenService.removeToken();
-  }
+function logout() {
+  tokenService.removeToken();
+}
   
-  function login(creds) {
-    return fetch(BASE_URL + 'login', {
-      method: 'POST',
-      headers: new Headers({'Content-Type': 'application/json'}),
-      body: JSON.stringify(creds)
-    })
-    .then(res => {
-      if (res.ok) return res.json();
-      throw new Error('Bad Credentials!');
-    })
-    .then(({token}) => tokenService.setToken(token));
-  }
-  
-  function like(id, rest) {
-    return fetch(BASE_URL + 'like', {
-      method: 'POST',
-      headers: new Headers({'Content-Type': 'application/json'}),
-      body: JSON.stringify({id, rest})
-    })
-    .then(res => res.json());
-  }
+function login(creds) {
+  return fetch(BASE_URL + 'login', {
+    method: 'POST',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify(creds)
+  })
+  .then(res => {
+    if (res.ok) return res.json();
+    throw new Error('Bad Credentials!');
+  })
+  .then(({token}) => tokenService.setToken(token));
+}
+
+function like(id, rest) {
+  return fetch(BASE_URL + 'like', {
+    method: 'POST',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify({id, rest})
+  })
+  .then(res => res.json());
+}
+
+function getLikes(id) {
+  return fetch(BASE_URL + '/likes/' + id).then(res => res.json());
+}
+function see(id, rest) {
+  return fetch(BASE_URL + 'see', {
+    method: 'POST',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify({id, rest})
+  })
+  .then(res => res.json());
+}
+
+function getSeen(id) {
+  return fetch(BASE_URL + '/seen/' + id).then(res => res.json());
+}

@@ -8,6 +8,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import SwipePage from '../SwipePage/SwipePage'
+import LikePage from '../LikePage/LikePage';
 
 const drawerWidth = 250;
 
@@ -84,7 +85,7 @@ const UserPage = props => {
                 )
                 }/>
                 <Route exact path='/likes' render={() => (
-                    <h1>Likes</h1>
+                    <LikePage user={props.user} />
                 )
                 }/>
                 <Route exact path='/matches' render={({history}) => (
