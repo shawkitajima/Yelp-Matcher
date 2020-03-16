@@ -9,7 +9,11 @@ const Swipe = props => {
         categories: [],
         location: {},
         rating: 0,
-        photos: []
+        photos: [],
+        coordinates: {
+            latitude: 0,
+            longitude: 0
+        }
     });
 
     const [reviews, setReviews] = useState({reviews: []})
@@ -21,7 +25,7 @@ const Swipe = props => {
 
     return (
         <div>
-            <h1>{detail.name}</h1>
+            <h1>{detail.name} {detail.price}</h1>
             <Carousel showThumbs={false} infiniteLoop autoPlay >
                 {detail.photos.map((photo, idx) => (
                     <div key={idx} >
@@ -35,6 +39,7 @@ const Swipe = props => {
             ))}
             </h2>
             <h2>{detail.location.address1}, {detail.location.city} {detail.location.zip_code}</h2>
+            <img src={`https://maps.googleapis.com/maps/api/staticmap?center=${detail.coordinates.latitude},${detail.coordinates.longitude}&zoom=15&size=400x400&markers=color:blue%7Clabel:S%7C${detail.coordinates.latitude},${detail.coordinates.longitude}&key=AIzaSyAqXlmJCxRWZkIRpwD932Gl4vXk8WyCr6U`} alt="sorry"/>
             <h2>Phone: {detail.display_phone}</h2>
             <div>
                 <h2>{detail.price}</h2>
@@ -43,7 +48,7 @@ const Swipe = props => {
             </div>
             {reviews.reviews.map((review, idx) => (
                     <div key={idx}>
-                        <h2>Rating: {review.rating}</h2>
+                        <h2>Rating: <img src={require(`./large_${review.rating}.png`)} alt="sorry"/></h2>
                         <p>{review.user.name} said: "{review.text}" ...<a href={review.url} target="_blank" rel="noopener noreferrer">read more</a></p>
                     </div>
             ))}
