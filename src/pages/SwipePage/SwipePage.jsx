@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { usePosition} from 'use-position';
 import restaurantService from '../../utils/restaurantService';
 import userService from '../../utils/userService';
@@ -39,14 +39,14 @@ const SwipePage = props => {
     }, [latitude, longitude, offset])
 
     // Checks if user has already looked at this restaurant
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (seen.includes(rests[resIdx].id)) {
             setResIdx(resIdx + 1);
         }
         else {
             userService.see(props.user._id, rests[resIdx].id);
         }
-    }, [resIdx, seen, rests])
+    }, [resIdx, seen, rests, props.user])
     
     return (
         <div>

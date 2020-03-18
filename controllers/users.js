@@ -7,8 +7,12 @@ module.exports = {
   login,
   like,
   getLikes,
+  removeLike,
   see,
   getSeen,
+  search,
+  friendRequest,
+  acceptRequest,
 };
 
 async function signup(req, res) {
@@ -61,6 +65,18 @@ function getLikes(req, res) {
   });
 }
 
+function removeLike(req, res) {
+  console.log(req.params.rest);
+  User.findById(req.params.id, function(err, user) {
+    let likes = user.likes;
+    let removed = likes.filter(like => like !== req.params.rest);
+    console.log(removed);
+    User.findByIdAndUpdate(req.params.id, {likes: removed}, {new: true}, function(err, newUser) {
+      res.send(newUser);
+    });
+  });
+}
+
 function see(req, res) {
   User.findById(req.body.id, function(err, user) {
     let seen = user.seen;
@@ -77,7 +93,62 @@ function getSeen(req, res) {
   });
 }
 
+function search(req, res) {
+  console.log(req.params.id);
+  User.find({name: new RegExp('^'+ req.params.query + '$', 'i')}, function(err, users) {
+    if (err) console.log(err);
+    // we only want to send back names and ids, as we don't want users to have access to likes
+    let response = [];
+    users.forEach(user => {
+      // don't include users that match the current user
+      if (user._id != req.params.id) {
+        response.push({
+          name: user.name,
+          id: user._id
+        });
+      }
+    });
+    res.send(response);
+  });
+}
 
+function friendRequest(req, res) {
+  User.findById(req.body.friend, function(err, user) {
+    // we don't want to ask friends to be friends again
+    if (user.friends.includes(req.body.id)) {
+      return res.send('already friended!');
+    }
+    console.log(user);
+    pending = user.pending;
+    pending.push(req.body.id);
+    User.findByIdAndUpdate(req.body.friend, {pending}, {new: true}, function(err, newFriend) {
+      res.send(newFriend.pending)
+    });
+  });
+}
+
+function acceptRequest(req, res) {
+  User.findById(req.body.id, function(err, user) {
+    // we don't want to allow duplicate acceptances
+    if (user.friends.includes(req.body.friend)) {
+      return res.send('already friended!');
+    }
+    newPending = user.pending.filter(id => id != req.body.friend);
+    newFriends = [...user.friends, req.body.friend];
+    User.findByIdAndUpdate(req.body.id, {
+      pending: newPending,
+      friends: newFriends
+    }, {new: true}, function(err, newUser) {
+      if (err) console.log(err);
+      User.findById(req.body.friend, function(err, friend) {
+        friendFriends = [...friend.friends, req.body.id];
+        User.findByIdAndUpdate(req.body.friend, {friends: friendFriends}, function(err, newFriend) {
+          res.send(newUser.pending);
+        });
+      });
+    });
+  });
+}
 
 // Make helper functions for JWT
 

@@ -7,7 +7,9 @@ const userSchema = new mongoose.Schema({
   email: {type: String, required: true, lowercase: true, unique: true},
   password: String,
   likes: [],
-  seen: []
+  seen: [],
+  friends: [],
+  pending: []
 }, {
   timestamps: true
 });

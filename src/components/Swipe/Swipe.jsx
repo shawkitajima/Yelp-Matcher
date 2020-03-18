@@ -25,7 +25,6 @@ const Swipe = props => {
 
     return (
         <div>
-            <h1>{detail.name} {detail.price}</h1>
             <Carousel showThumbs={false} infiniteLoop autoPlay >
                 {detail.photos.map((photo, idx) => (
                     <div key={idx} >
@@ -33,6 +32,7 @@ const Swipe = props => {
                     </div>
                 ))}
             </Carousel>
+            <h1>{detail.name} {detail.price}</h1>
             <h2>
                 {detail.categories.map((category, idx) => (
                 <div key={idx}>{category.title}</div>
@@ -44,7 +44,8 @@ const Swipe = props => {
             <div>
                 <h2>{detail.price}</h2>
                 <img src={require(`./large_${detail.rating}.png`)} alt="sorry"/>
-                <h2>Based on {detail.review_count} reviews</h2>
+                <h2>Based on {detail.review_count} reviews from:</h2>
+                <a href={detail.url} target="_blank" rel="noopener noreferrer"><img src={require('./yelp-logo.png')} alt="sorry"/></a>
             </div>
             {reviews.reviews.map((review, idx) => (
                     <div key={idx}>

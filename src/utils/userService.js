@@ -10,6 +10,7 @@ export default {
     getLikes,
     see,
     getSeen,
+    removeLike
   };
 
 
@@ -60,6 +61,14 @@ function like(id, rest) {
 function getLikes(id) {
   return fetch(BASE_URL + '/likes/' + id).then(res => res.json());
 }
+
+function removeLike(id, rest) {
+  return fetch(BASE_URL + 'likes/' + id + '/' + rest, {
+    method: 'DELETE',
+  })
+  .then(res => res.json());
+}
+
 function see(id, rest) {
   return fetch(BASE_URL + 'see', {
     method: 'POST',
