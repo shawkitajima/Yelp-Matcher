@@ -5,7 +5,7 @@ const LikeOverview = props => {
     const [details, setDetails] = useState({rating: 0});
     useEffect(() => {
         restaurantService.detail(props.id).then(res => setDetails(res));
-    }, [])
+    }, [props.id])
     return (
         <div>
             <h1>

@@ -9,10 +9,10 @@ export default {
     like,
     getLikes,
     see,
-    getSeen,
     removeLike,
     search,
-    request
+    request,
+    offset
   };
 
 
@@ -80,10 +80,6 @@ function see(id, rest) {
   .then(res => res.json());
 }
 
-function getSeen(id) {
-  return fetch(BASE_URL + 'seen/' + id).then(res => res.json());
-}
-
 function search(id, query) {
   return fetch(BASE_URL + 'search/' + id + '/' + query).then(res => res.json());
 }
@@ -95,4 +91,13 @@ function request(id, friend) {
     body: JSON.stringify({id, friend})
   })
   .then(res => res.json());
+}
+
+function offset(id) {
+  return fetch(BASE_URL + 'offset', {
+    method: 'POST',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify({id})
+  })
+  .then(res => res.json());  
 }

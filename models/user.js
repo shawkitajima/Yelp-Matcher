@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   likes: [],
   seen: [],
   friends: [],
-  pending: []
+  pending: [],
+  yelpOffset: Number,
 }, {
   timestamps: true
 });

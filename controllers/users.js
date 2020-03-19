@@ -13,6 +13,7 @@ module.exports = {
   search,
   friendRequest,
   acceptRequest,
+  offset,
 };
 
 async function signup(req, res) {
@@ -152,6 +153,17 @@ function acceptRequest(req, res) {
       });
     });
   });
+}
+
+function offset(req, res) {
+  User.findById(req.body.id, function(err, user) {
+    let yelpOffset = parseInt(user.yelpOffset) + 50;
+    User.findByIdAndUpdate(req.body.id, {yelpOffset}, function(err, newUser) {
+      if (err) console.log(err);
+      console.log(newUser.yelpOffset);
+      res.send({message: 'mission accomplished'});
+    })
+  })
 }
 
 // Make helper functions for JWT

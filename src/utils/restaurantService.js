@@ -7,11 +7,11 @@ export default {
   };
 
 
-function restaurants(lat, long, offset) {
+function restaurants(lat, long, id) {
     return fetch(BASE_URL, {
         method: 'POST',
         headers: new Headers({'Content-Type': 'application/json'}),
-        body: JSON.stringify({lat, long, offset})
+        body: JSON.stringify({lat, long, id})
     }).then(res => res.json());
 }
 
