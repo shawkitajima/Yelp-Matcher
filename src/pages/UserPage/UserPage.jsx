@@ -9,10 +9,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import SwipePage from '../SwipePage/SwipePage'
 import LikePage from '../LikePage/LikePage';
+import FriendSearchPage from '../FriendSearchPage/FriendSearchPage';
 
 const drawerWidth = 250;
 
 const useStyles = makeStyles(theme => ({
+
     body: {
       backgroundColor: '#181818',
       color: 'white'
@@ -76,6 +78,9 @@ const UserPage = props => {
               <ListItem button component={Link} to="/friends">
                 <ListItemText primary='Friends' />
               </ListItem>
+              <ListItem button component={Link} to="/friendSearch">
+                <ListItemText primary='Search Friends' />
+              </ListItem>
           </List>
         </Drawer>
         <main className={classes.content}>
@@ -94,6 +99,10 @@ const UserPage = props => {
                 }/>
                 <Route exact path='/friends' render={({history}) => (
                     <h1>Friends</h1>
+                )
+                }/>
+                <Route exact path='/friendSearch' render={({history}) => (
+                    <FriendSearchPage user={props.user} />
                 )
                 }/>
             </Switch>

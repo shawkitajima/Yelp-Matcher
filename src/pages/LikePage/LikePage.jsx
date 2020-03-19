@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import userService from '../../utils/userService';
-import LikeOverview from '../LikeOverview/LikeOverview';
+import LikeOverview from '../../components/LikeOverview/LikeOverview';
 
 const LikePage = props => {
     const [likes, setLikes] = useState([]);

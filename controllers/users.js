@@ -116,13 +116,17 @@ function friendRequest(req, res) {
   User.findById(req.body.friend, function(err, user) {
     // we don't want to ask friends to be friends again
     if (user.friends.includes(req.body.id)) {
-      return res.send('already friended!');
+      return res.send({message: 'already friended!'});
     }
-    console.log(user);
+
+    if (user.pending.includes(req.body.id)) {
+      return res.send({message: 'your request is already pending'});
+    }
+
     pending = user.pending;
     pending.push(req.body.id);
     User.findByIdAndUpdate(req.body.friend, {pending}, {new: true}, function(err, newFriend) {
-      res.send(newFriend.pending)
+      res.send({message: 'Friend Request Sent!'});
     });
   });
 }
