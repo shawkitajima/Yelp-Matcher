@@ -14,6 +14,7 @@ module.exports = {
   friendRequest,
   acceptRequest,
   offset,
+  getNotifications
 };
 
 async function signup(req, res) {
@@ -114,17 +115,17 @@ function search(req, res) {
 }
 
 function friendRequest(req, res) {
-  User.findById(req.body.friend, function(err, user) {
+  User.findById(req.body.friend, function(err, friend) {
     // we don't want to ask friends to be friends again
-    if (user.friends.includes(req.body.id)) {
+    if (friend.friends.includes(req.body.id)) {
       return res.send({message: 'already friended!'});
     }
 
-    if (user.pending.includes(req.body.id)) {
+    if (friend.pending.includes(req.body.id)) {
       return res.send({message: 'your request is already pending'});
     }
 
-    pending = user.pending;
+    pending = friend.pending;
     pending.push(req.body.id);
     User.findByIdAndUpdate(req.body.friend, {pending}, {new: true}, function(err, newFriend) {
       res.send({message: 'Friend Request Sent!'});
@@ -163,6 +164,16 @@ function offset(req, res) {
       console.log(newUser.yelpOffset);
       res.send({message: 'mission accomplished'});
     })
+  })
+}
+
+function getNotifications(req, res) {
+  User.findById(req.params.id)
+  .populate('pending', 'name')
+  .exec(function(err, user) {
+    let pending = user.pending;
+    let notifications = user.notifications;
+    res.send({pending, notifications});
   })
 }
 

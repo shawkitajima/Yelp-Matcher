@@ -12,7 +12,8 @@ export default {
     removeLike,
     search,
     request,
-    offset
+    offset,
+    getNotifications,
   };
 
 
@@ -100,4 +101,8 @@ function offset(id) {
     body: JSON.stringify({id})
   })
   .then(res => res.json());  
+}
+
+function getNotifications(id) {
+  return fetch(BASE_URL + 'notifications/' + id).then(res => res.json());
 }

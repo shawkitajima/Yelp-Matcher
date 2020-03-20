@@ -10,6 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import SwipePage from '../SwipePage/SwipePage'
 import LikePage from '../LikePage/LikePage';
 import FriendSearchPage from '../FriendSearchPage/FriendSearchPage';
+import NotificationsPage from '../NotificationsPage/NotificationsPage';
 
 const drawerWidth = 250;
 
@@ -81,6 +82,9 @@ const UserPage = props => {
               <ListItem button component={Link} to="/friendSearch">
                 <ListItemText primary='Search Friends' />
               </ListItem>
+              <ListItem button component={Link} to="/notifications">
+                <ListItemText primary='Notifications' />
+              </ListItem>
           </List>
         </Drawer>
         <main className={classes.content}>
@@ -103,6 +107,10 @@ const UserPage = props => {
                 }/>
                 <Route exact path='/friendSearch' render={({history}) => (
                     <FriendSearchPage user={props.user} />
+                )
+                }/>
+                <Route exact path='/notifications' render={({history}) => (
+                  <NotificationsPage user={props.user} />
                 )
                 }/>
             </Switch>

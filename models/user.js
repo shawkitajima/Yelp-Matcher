@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 6;
 
@@ -8,9 +9,13 @@ const userSchema = new mongoose.Schema({
   password: String,
   likes: [],
   seen: [],
-  friends: [],
-  pending: [],
-  yelpOffset: Number,
+  friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  pending: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  yelpOffset: {
+    type: Number,
+    default: 0
+  },
+  notifications: [],
 }, {
   timestamps: true
 });
