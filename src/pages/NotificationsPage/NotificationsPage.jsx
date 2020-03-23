@@ -5,7 +5,7 @@ const NotificationsPage = props => {
 
     useEffect(() => {
         props.getNotifications()
-      }, [props])
+      }, [])
     
     return (
         <div>
