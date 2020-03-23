@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
+import userService from '../../utils/userService';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -53,6 +54,16 @@ const useStyles = makeStyles(theme => ({
 
 const UserPage = props => {
     const classes = useStyles();
+
+    const [pending, setPending] = useState([]);
+    const [notifications, setNotifications] = useState([]);
+
+    useEffect(() => {
+        userService.getNotifications(props.user._id).then(res => {
+            setPending(res.pending);
+            setNotifications(res.notifications);
+        })
+    }, [props.user])
 
     return (
         <div className={classes.root} >
@@ -110,7 +121,7 @@ const UserPage = props => {
                 )
                 }/>
                 <Route exact path='/notifications' render={({history}) => (
-                  <NotificationsPage user={props.user} />
+                  <NotificationsPage user={props.user} pending={pending} notifications={notifications} />
                 )
                 }/>
             </Switch>

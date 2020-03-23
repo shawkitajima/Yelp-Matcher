@@ -14,6 +14,7 @@ export default {
     request,
     offset,
     getNotifications,
+    acceptRequest,
   };
 
 
@@ -105,4 +106,13 @@ function offset(id) {
 
 function getNotifications(id) {
   return fetch(BASE_URL + 'notifications/' + id).then(res => res.json());
+}
+
+function acceptRequest(id, friend) {
+  return fetch(BASE_URL + 'friends/accept', {
+    method: 'POST',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify({id, friend})
+  })
+  .then(res => res.json());
 }

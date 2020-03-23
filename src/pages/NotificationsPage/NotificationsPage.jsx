@@ -1,35 +1,27 @@
-import React, {useState, useEffect} from 'react';
-import userService from '../../utils/userService';
+import React from 'react';
+import PendingRequest from '../../components/PendingRequest/PendingRequest';
 
 const NotificationsPage = props => {
-    const [pending, setPending] = useState();
-    const [notifications, setNotifications] = useState();
 
-    useEffect(() => {
-        userService.getNotifications(props.user._id).then(res => {
-            setPending(res.pending);
-            setNotifications(res.notifications);
-        })
-    }, [props.user])
     return (
         <div>
-            {notifications + pending ? (
+            {props.notifications + props.pending ? (
             <div>
-                <h1>Here are your notifications</h1>
-                    {pending && (
+                <h1>Here are your props.notifications</h1>
+                    {props.pending.length > 0 && (
                         <div>
                             <h2>You have friend requests pending!</h2>
-                            {pending.map((request, idx) => (
+                            {props.pending.map((request, idx) => (
                                 <div key={idx}>
-                                    <h1>{request.name}</h1>
+                                    <PendingRequest pending={request}  user={props.user}/>
                                 </div>
                             ))}
                         </div>
                     )}
-                    {notifications && (
+                    {props.notifications.length > 0 && (
                         <div>
                             <h2>Here are your other notifications</h2>
-                            {notifications.map((notification, idx) => (
+                            {props.notifications.map((notification, idx) => (
                                 <div key={idx}>
                                     <h1>{notification}</h1>
                                 </div>
@@ -39,7 +31,7 @@ const NotificationsPage = props => {
             </div>
             ) : (
             <div>
-                <h1>Hmm, it looks like you don't have any notifactions</h1>
+                <h1>Hmm, it looks like you don't have any notifications</h1>
             </div>
             )
             }

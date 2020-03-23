@@ -137,7 +137,7 @@ function acceptRequest(req, res) {
   User.findById(req.body.id, function(err, user) {
     // we don't want to allow duplicate acceptances
     if (user.friends.includes(req.body.friend)) {
-      return res.send('already friended!');
+      return res.send({message: 'already friended!'});
     }
     newPending = user.pending.filter(id => id != req.body.friend);
     newFriends = [...user.friends, req.body.friend];
@@ -149,7 +149,7 @@ function acceptRequest(req, res) {
       User.findById(req.body.friend, function(err, friend) {
         friendFriends = [...friend.friends, req.body.id];
         User.findByIdAndUpdate(req.body.friend, {friends: friendFriends}, function(err, newFriend) {
-          res.send(newUser.pending);
+          res.send({message: newUser.pending});
         });
       });
     });
