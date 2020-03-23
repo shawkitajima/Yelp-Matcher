@@ -67,7 +67,7 @@ const UserPage = props => {
 
     useEffect(() => {
       getNotifications()
-    }, [])
+    }, [props.user,])
 
 
     return (
