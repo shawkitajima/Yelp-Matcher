@@ -16,6 +16,8 @@ router.post('/friends/accept', usersCtrl.acceptRequest);
 router.delete('/pending', usersCtrl.rejectRequest);
 router.post('/offset', usersCtrl.offset);
 router.get('/notifications/:id', usersCtrl.getNotifications);
+router.get('/friends/:id', usersCtrl.getFriends);
+router.delete('/friend', usersCtrl.deleteFriend);
 
 
 /*---------- Protected Routes ----------*/

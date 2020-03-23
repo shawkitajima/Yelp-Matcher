@@ -16,6 +16,8 @@ export default {
     getNotifications,
     acceptRequest,
     rejectRequest,
+    getFriends,
+    deleteFriend,
   };
 
 
@@ -40,6 +42,7 @@ function getUser() {
 function logout() {
   tokenService.removeToken();
 }
+
   
 function login(creds) {
   return fetch(BASE_URL + 'login', {
@@ -125,4 +128,17 @@ function rejectRequest(id, pending) {
     body: JSON.stringify({id, pending})
   })
   .then(res => res.json());  
+}
+
+function getFriends(id) {
+  return fetch(BASE_URL + friends + '/' + id).then(res => res.json());
+}
+
+function deleteFriend(id, friend) {
+  return fetch(BASE_URL + 'friend', {
+    method: 'DELETE',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify({id, friend})
+  })
+  .then(res => res.json()); 
 }

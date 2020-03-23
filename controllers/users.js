@@ -16,6 +16,8 @@ module.exports = {
   offset,
   getNotifications,
   rejectRequest,
+  getFriends,
+  deleteFriend,
 };
 
 async function signup(req, res) {
@@ -187,6 +189,28 @@ function getNotifications(req, res) {
     let notifications = user.notifications;
     res.send({pending, notifications});
   })
+}
+
+function getFriends(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    res.send(user.friends);
+  });
+}
+
+function deleteFriend(req, res) {
+  User.findById(req.body.id, function(err, user) {
+    let newFriends = user.friends.filter(friend => friend != req.body.friend);
+    User.findByIdAndUpdate(req.body.id, {friends: newFriends}, function(err, newUser) {
+      if (err) console.log(err);
+      User.findById(req.body.friend, function(err, friend) {
+        let newFriends = friend.friends.filter(friend => friend != req.body.id);
+        User.findByIdAndUpdate(req.body.friend, {friends: newFriends}, function(err, newFriend) {
+          if (err) console.log(err);
+          res.send(newFriend);
+        });
+      });
+    });
+  });
 }
 
 // Make helper functions for JWT
