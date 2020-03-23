@@ -13,6 +13,7 @@ router.get('/seen/:id', usersCtrl.getSeen);
 router.get('/search/:id/:query', usersCtrl.search);
 router.post('/friends/request', usersCtrl.friendRequest);
 router.post('/friends/accept', usersCtrl.acceptRequest);
+router.delete('/pending', usersCtrl.rejectRequest);
 router.post('/offset', usersCtrl.offset);
 router.get('/notifications/:id', usersCtrl.getNotifications);
 

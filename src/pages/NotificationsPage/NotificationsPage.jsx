@@ -7,7 +7,7 @@ const NotificationsPage = props => {
         <div>
             {props.notifications + props.pending ? (
             <div>
-                <h1>Here are your props.notifications</h1>
+                <h1>Here are your notifications</h1>
                     {props.pending.length > 0 && (
                         <div>
                             <h2>You have friend requests pending!</h2>

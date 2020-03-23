@@ -15,6 +15,7 @@ export default {
     offset,
     getNotifications,
     acceptRequest,
+    rejectRequest,
   };
 
 
@@ -115,4 +116,13 @@ function acceptRequest(id, friend) {
     body: JSON.stringify({id, friend})
   })
   .then(res => res.json());
+}
+
+function rejectRequest(id, pending) {
+  return fetch(BASE_URL + 'pending', {
+    method: 'DELETE',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify({id, pending})
+  })
+  .then(res => res.json());  
 }

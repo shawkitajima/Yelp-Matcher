@@ -14,7 +14,8 @@ module.exports = {
   friendRequest,
   acceptRequest,
   offset,
-  getNotifications
+  getNotifications,
+  rejectRequest,
 };
 
 async function signup(req, res) {
@@ -139,19 +140,30 @@ function acceptRequest(req, res) {
     if (user.friends.includes(req.body.friend)) {
       return res.send({message: 'already friended!'});
     }
-    newPending = user.pending.filter(id => id != req.body.friend);
-    newFriends = [...user.friends, req.body.friend];
+    let newPending = user.pending.filter(id => id != req.body.friend);
+    let newFriends = [...user.friends, req.body.friend];
     User.findByIdAndUpdate(req.body.id, {
       pending: newPending,
       friends: newFriends
     }, {new: true}, function(err, newUser) {
       if (err) console.log(err);
       User.findById(req.body.friend, function(err, friend) {
-        friendFriends = [...friend.friends, req.body.id];
-        User.findByIdAndUpdate(req.body.friend, {friends: friendFriends}, function(err, newFriend) {
+        let friendFriends = [...friend.friends, req.body.id];
+        let friendNotifications = [...friend.notifications, `${user.name} accepted your friend request!`];
+        User.findByIdAndUpdate(req.body.friend, {friends: friendFriends, notifications: friendNotifications}, function(err, newFriend) {
           res.send({message: newUser.pending});
         });
       });
+    });
+  });
+}
+
+function rejectRequest(req, res) {
+  User.findById(req.body.id, function(err, user) {
+    let newPending = user.pending.filter(pending => pending != req.body.pending);
+    User.findByIdAndUpdate(req.body.id, {pending: newPending}, {new: true}, function(err, updatedUser) {
+      if (err) console.log(err);
+      res.send(updatedUser);
     });
   });
 }

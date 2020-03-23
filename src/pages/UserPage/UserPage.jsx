@@ -63,7 +63,7 @@ const UserPage = props => {
             setPending(res.pending);
             setNotifications(res.notifications);
         })
-    }, [props.user])
+    }, [])
 
     return (
         <div className={classes.root} >
@@ -95,6 +95,9 @@ const UserPage = props => {
               </ListItem>
               <ListItem button component={Link} to="/notifications">
                 <ListItemText primary='Notifications' />
+              </ListItem>
+              <ListItem button onClick={() => props.handleLogout()}>
+                <ListItemText primary='Logout' />
               </ListItem>
           </List>
         </Drawer>
