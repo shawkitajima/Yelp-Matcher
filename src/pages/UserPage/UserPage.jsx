@@ -12,6 +12,7 @@ import SwipePage from '../SwipePage/SwipePage'
 import LikePage from '../LikePage/LikePage';
 import FriendSearchPage from '../FriendSearchPage/FriendSearchPage';
 import NotificationsPage from '../NotificationsPage/NotificationsPage';
+import FriendPage from '../FriendPage/FriendPage';
 
 const drawerWidth = 250;
 
@@ -121,7 +122,7 @@ const UserPage = props => {
                 )
                 }/>
                 <Route exact path='/friends' render={({history}) => (
-                    <h1>Friends</h1>
+                    <FriendPage user={props.user} />
                 )
                 }/>
                 <Route exact path='/friendSearch' render={({history}) => (

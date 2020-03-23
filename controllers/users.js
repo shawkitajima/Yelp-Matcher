@@ -192,9 +192,12 @@ function getNotifications(req, res) {
 }
 
 function getFriends(req, res) {
-  User.findById(req.params.id, function(err, user) {
+  User.findById(req.params.id)
+  .populate('friends', 'name')
+  .exec(function(err, user) {
+    if (err) console.log(err);
     res.send(user.friends);
-  });
+  })
 }
 
 function deleteFriend(req, res) {

@@ -131,7 +131,7 @@ function rejectRequest(id, pending) {
 }
 
 function getFriends(id) {
-  return fetch(BASE_URL + friends + '/' + id).then(res => res.json());
+  return fetch(BASE_URL + 'friends/' + id).then(res => res.json());
 }
 
 function deleteFriend(id, friend) {
