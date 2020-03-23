@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PendingRequest from '../../components/PendingRequest/PendingRequest';
 
 const NotificationsPage = props => {
 
+    useEffect(() => {
+        props.getNotifications()
+      }, [])
+    
     return (
         <div>
             {props.notifications + props.pending ? (
@@ -13,7 +17,7 @@ const NotificationsPage = props => {
                             <h2>You have friend requests pending!</h2>
                             {props.pending.map((request, idx) => (
                                 <div key={idx}>
-                                    <PendingRequest pending={request}  user={props.user}/>
+                                    <PendingRequest pending={request}  user={props.user} getNotifications={props.getNotifications}/>
                                 </div>
                             ))}
                         </div>

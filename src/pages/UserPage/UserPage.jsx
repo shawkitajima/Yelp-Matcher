@@ -57,13 +57,18 @@ const UserPage = props => {
 
     const [pending, setPending] = useState([]);
     const [notifications, setNotifications] = useState([]);
+    
+    const getNotifications = () => {
+      userService.getNotifications(props.user._id).then(res => {
+        setPending(res.pending);
+        setNotifications(res.notifications);
+      })
+    }
 
     useEffect(() => {
-        userService.getNotifications(props.user._id).then(res => {
-            setPending(res.pending);
-            setNotifications(res.notifications);
-        })
+      getNotifications()
     }, [])
+
 
     return (
         <div className={classes.root} >
@@ -124,7 +129,7 @@ const UserPage = props => {
                 )
                 }/>
                 <Route exact path='/notifications' render={({history}) => (
-                  <NotificationsPage user={props.user} pending={pending} notifications={notifications} />
+                  <NotificationsPage user={props.user} pending={pending} notifications={notifications} getNotifications={getNotifications} />
                 )
                 }/>
             </Switch>
