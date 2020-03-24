@@ -19,6 +19,7 @@ export default {
     rejectRequest,
     getFriends,
     deleteFriend,
+    getMatches,
   };
 
 
@@ -150,4 +151,8 @@ function deleteFriend(id, friend) {
     body: JSON.stringify({id, friend})
   })
   .then(res => res.json()); 
+}
+
+function getMatches(id, friend) {
+  return fetch(BASE_URL + 'matches/' + id + '/' + friend).then(res => res.json());
 }

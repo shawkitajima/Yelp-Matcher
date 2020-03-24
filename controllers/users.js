@@ -19,6 +19,7 @@ module.exports = {
   rejectRequest,
   getFriends,
   deleteFriend,
+  getMatches,
 };
 
 async function signup(req, res) {
@@ -223,6 +224,15 @@ function deleteFriend(req, res) {
           res.send(newFriend);
         });
       });
+    });
+  });
+}
+
+function getMatches(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    User.findById(req.params.friend, function(err, friend) {
+      let matches = user.likes.filter(like => friend.likes.includes(like));
+      res.send(matches);
     });
   });
 }

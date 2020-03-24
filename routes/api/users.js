@@ -19,6 +19,7 @@ router.get('/notifications/:id', usersCtrl.getNotifications);
 router.delete('/notifications/:id/:idx', usersCtrl.deleteNotification);
 router.get('/friends/:id', usersCtrl.getFriends);
 router.delete('/friend', usersCtrl.deleteFriend);
+router.get('/matches/:id/:friend', usersCtrl.getMatches);
 
 
 /*---------- Protected Routes ----------*/
