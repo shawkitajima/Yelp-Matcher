@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import PendingRequest from '../../components/PendingRequest/PendingRequest';
+import NotificationOverview from '../../components/NotificationOverview/NotificationOverview';
 
 const NotificationsPage = props => {
 
@@ -27,7 +28,7 @@ const NotificationsPage = props => {
                             <h2>Here are your other notifications</h2>
                             {props.notifications.map((notification, idx) => (
                                 <div key={idx}>
-                                    <h1>{notification}</h1>
+                                    <NotificationOverview notification={notification} idx={idx} user={props.user} getNotifications={props.getNotifications} />
                                 </div>
                             ))}
                         </div>

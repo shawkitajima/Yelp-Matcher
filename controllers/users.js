@@ -15,6 +15,7 @@ module.exports = {
   acceptRequest,
   offset,
   getNotifications,
+  deleteNotification,
   rejectRequest,
   getFriends,
   deleteFriend,
@@ -189,6 +190,16 @@ function getNotifications(req, res) {
     let notifications = user.notifications;
     res.send({pending, notifications});
   })
+}
+
+function deleteNotification(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    user.notifications.splice(req.params.idx, 1);
+    User.findByIdAndUpdate(req.params.id, {notifications: user.notifications}, function(err, newUser) {
+      if (err) console.log(err);
+      res.send({message: 'mission accomplished'});
+    });
+  });
 }
 
 function getFriends(req, res) {

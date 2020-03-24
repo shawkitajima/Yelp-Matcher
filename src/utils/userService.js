@@ -14,6 +14,7 @@ export default {
     request,
     offset,
     getNotifications,
+    deleteNotification,
     acceptRequest,
     rejectRequest,
     getFriends,
@@ -110,6 +111,14 @@ function offset(id) {
 
 function getNotifications(id) {
   return fetch(BASE_URL + 'notifications/' + id).then(res => res.json());
+}
+
+function deleteNotification(id, idx) {
+  return fetch(BASE_URL + 'notifications/' + id + '/' + idx, {
+    method: 'DELETE',
+    headers: new Headers({'Content-Type': 'application/json'}),
+  })
+  .then(res => res.json());
 }
 
 function acceptRequest(id, friend) {
