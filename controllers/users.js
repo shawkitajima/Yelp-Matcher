@@ -229,6 +229,7 @@ function deleteFriend(req, res) {
 }
 
 function getMatches(req, res) {
+  if (req.params.friend == 0) return res.send([]);
   User.findById(req.params.id, function(err, user) {
     User.findById(req.params.friend, function(err, friend) {
       let matches = user.likes.filter(like => friend.likes.includes(like));

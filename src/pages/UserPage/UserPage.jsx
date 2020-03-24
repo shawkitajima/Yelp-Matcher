@@ -13,6 +13,7 @@ import LikePage from '../LikePage/LikePage';
 import FriendSearchPage from '../FriendSearchPage/FriendSearchPage';
 import NotificationsPage from '../NotificationsPage/NotificationsPage';
 import FriendPage from '../FriendPage/FriendPage';
+import MatchPage from '../MatchPage/MatchPage';
 
 const drawerWidth = 250;
 
@@ -118,7 +119,7 @@ const UserPage = props => {
                 )
                 }/>
                 <Route exact path='/matches' render={({history}) => (
-                    <h1>Matches</h1>
+                    <MatchPage user={props.user} />
                 )
                 }/>
                 <Route exact path='/friends' render={({history}) => (
