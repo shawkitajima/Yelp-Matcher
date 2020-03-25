@@ -120,22 +120,25 @@ function search(req, res) {
 }
 
 function friendRequest(req, res) {
-  User.findById(req.body.friend, function(err, friend) {
-    // we don't want to ask friends to be friends again
-    if (friend.friends.includes(req.body.id)) {
-      return res.send({message: 'already friended!'});
-    }
-
-    if (friend.pending.includes(req.body.id)) {
-      return res.send({message: 'your request is already pending'});
-    }
-
-    pending = friend.pending;
-    pending.push(req.body.id);
-    User.findByIdAndUpdate(req.body.friend, {pending}, {new: true}, function(err, newFriend) {
-      res.send({message: 'Friend Request Sent!'});
+  User.findById(req.body.id, function(err, user) {
+    User.findById(req.body.friend, function(err, friend) {
+      // we don't want to ask friends to be friends again
+      if (user.pending.includes(req.body.friend)) {
+        return res.send({message: 'this person already sent you a friend request!'});
+      }
+      if (friend.friends.includes(req.body.id)) {
+        return res.send({message: 'you are already friends!'});
+      }
+      if (friend.pending.includes(req.body.id)) {
+        return res.send({message: 'your request is already pending'});
+      }
+      pending = friend.pending;
+      pending.push(req.body.id);
+      User.findByIdAndUpdate(req.body.friend, {pending}, {new: true}, function(err, newFriend) {
+        res.send({message: 'Friend Request Sent!'});
+      });
     });
-  });
+  })
 }
 
 function acceptRequest(req, res) {

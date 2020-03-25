@@ -5,6 +5,6 @@ const restaurantCtrl = require('../../controllers/restaurants');
 /*---------- Public Routes ----------*/
 router.get('/detail/:id', restaurantCtrl.detail);
 router.get('/reviews/:id', restaurantCtrl.reviews);
-router.post('/', restaurantCtrl.restaurants);
+router.get('/:id/:lat/:long/:offset', restaurantCtrl.restaurants);
 
 module.exports = router;

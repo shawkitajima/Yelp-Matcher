@@ -4,19 +4,18 @@ const User = require('../models/user');
 module.exports = {
     restaurants,
     detail,
-    reviews
+    reviews,
 }
 
-
 function restaurants(req, res) {
-    User.findById(req.body.id, function(err, user) {
+    User.findById(req.params.id, function(err, user) {
         const headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + process.env.YELP_KEY 
         };
         const options = {
-            url: `https://api.yelp.com/v3/businesses/search?term=restaurants&latitude=${req.body.lat}&longitude=${req.body.long}&open_now=true&limit=50&offset=${user.yelpOffset}`,
+            url: `https://api.yelp.com/v3/businesses/search?term=restaurants&latitude=${req.params.lat}&longitude=${req.params.long}&open_now=true&limit=50&offset=${req.params.offset}`,
             headers: headers
         };
         function callback(error, response, body) {
@@ -25,11 +24,15 @@ function restaurants(req, res) {
                 let parsed = JSON.parse(body);
                 let seen = new Set(user.seen);
                 let results = parsed.businesses.filter(rest => !seen.has(rest.id))
+                if (!results.length) {
+                    let newOffset = parseInt(req.params.offset) + 50;
+                    return res.redirect(`/api/restaurants/${req.params.id}/${req.params.lat}/${req.params.long}/${newOffset}`);
+                }
                 res.send(results);
             }
         }
         request(options, callback);
-    })
+    });
 }
 
 function detail(req, res) {

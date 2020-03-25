@@ -21,7 +21,6 @@ const SwipePage = props => {
         }
         else {
             setResIdx(0);
-            userService.offset(props.user._id);
             setOffset(offset + 1);
         }
     }
