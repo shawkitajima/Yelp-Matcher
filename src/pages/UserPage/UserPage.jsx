@@ -14,6 +14,7 @@ import FriendSearchPage from '../FriendSearchPage/FriendSearchPage';
 import NotificationsPage from '../NotificationsPage/NotificationsPage';
 import FriendPage from '../FriendPage/FriendPage';
 import MatchPage from '../MatchPage/MatchPage';
+import TopLikesPage from '../TopLikesPage/TopLikesPage';
 
 const drawerWidth = 250;
 
@@ -103,6 +104,9 @@ const UserPage = props => {
               <ListItem button component={Link} to="/notifications">
                 <ListItemText primary='Notifications' />
               </ListItem>
+              <ListItem button component={Link} to="/topLikes">
+                <ListItemText primary='Top Likes' />
+              </ListItem>
               <ListItem button onClick={() => props.handleLogout()}>
                 <ListItemText primary='Logout' />
               </ListItem>
@@ -132,6 +136,10 @@ const UserPage = props => {
                 }/>
                 <Route exact path='/notifications' render={({history}) => (
                   <NotificationsPage user={props.user} pending={pending} notifications={notifications} getNotifications={getNotifications} />
+                )
+                }/>
+                <Route exact path='/topLikes' render={({history}) => (
+                  <TopLikesPage user={props.user} />
                 )
                 }/>
             </Switch>
