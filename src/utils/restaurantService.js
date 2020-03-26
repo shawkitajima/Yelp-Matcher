@@ -4,6 +4,7 @@ export default {
     restaurants,
     detail,
     reviews,
+    topLikes,
 };
 
 
@@ -17,4 +18,8 @@ function detail(id) {
 
 function reviews(id) {
     return fetch(`${BASE_URL}/reviews/${id}`).then(res => res.json());
+}
+
+function topLikes() {
+    return fetch(`${BASE_URL}/top`).then(res => res.json());
 }

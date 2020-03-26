@@ -5,6 +5,7 @@ module.exports = {
     restaurants,
     detail,
     reviews,
+    topLikes
 }
 
 function restaurants(req, res) {
@@ -73,4 +74,32 @@ function reviews(req, res) {
         }
     }
     request(options, callback);
+}
+
+function topLikes(req, res) {
+    User.find({}, function(err, users) {
+        // concatenate all of the likes together
+        let allLikes = [];
+        users.forEach(user => {
+            allLikes = [...allLikes, ...user.likes];
+        })
+        // make an object that counts each instance of the likes
+        let counter = allLikes.reduce((acc, like) => {
+            acc[like] ? acc[like] += 1 : acc[like] = 1;
+            return acc;
+        }, {});
+        // now we can make an array of objects, where the objects will have two properties: like, count
+        let likeArr = [];
+        Object.keys(counter).forEach(id => {
+            likeArr.push({
+                like: id,
+                count: counter[id],
+            });
+        });
+        // let's sort that likeArry by count
+        likeArr.sort((a, b) => (b.count - a.count));
+        // Let's go ahead and limit the number to 20
+        let sliced = likeArr.slice(0, 20);
+        res.send(sliced);
+    })
 }
