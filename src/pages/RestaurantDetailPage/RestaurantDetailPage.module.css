@@ -1,0 +1,45 @@
+.flexHori {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.flexVerti {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.restImg {
+    margin: 0 2rem;
+    height: 15rem;
+    width: 23rem;
+    background-position: center;
+    
+}
+
+.container {
+    padding: 2rem;
+}
+
+.flexHori > div {
+    width: 20rem;
+    text-align: left;
+}
+
+.bottomHori {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bottomHori>div:nth-child(1) {
+    width: 35rem;
+}
+
+.bottomHori>div:nth-child(2) {
+    width: 35rem;
+}
+
+.bottomHori>div:nth-child(3)>a {
+    color: gray;
+}

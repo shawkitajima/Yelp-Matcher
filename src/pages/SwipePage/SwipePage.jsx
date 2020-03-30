@@ -3,6 +3,7 @@ import { usePosition} from 'use-position';
 import restaurantService from '../../utils/restaurantService';
 import userService from '../../utils/userService';
 import Swipe from '../../components/Swipe/Swipe';
+import RestaurantDetailPage from '../RestaurantDetailPage/RestaurantDetailPage'
 
 const SwipePage = props => {
 
@@ -36,10 +37,9 @@ const SwipePage = props => {
     
     return (
         <div>
-            <h1>It's Swiping Time</h1>
-            <Swipe id={rests[resIdx].id} />
-            <button onClick={() => like(rests[resIdx].id)}>Like</button>
-            <button onClick={() => moveNext()}>Nah</button>
+            <RestaurantDetailPage id={rests[resIdx].id}/>
+            {/* <button onClick={() => like(rests[resIdx].id)}>Like</button>
+            <button onClick={() => moveNext()}>Nah</button> */}
         </div>
     )
 }

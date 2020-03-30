@@ -12,7 +12,7 @@ const TopLikesPage = props => {
 
     return (
         <div>
-            <h1>Here are the top liked restaurants accross all users</h1>
+            <h1>Here are the top liked restaurants across all users</h1>
             {topLikes.map((rest, idx) => (
                 < LikeOverview id={rest.like} user={props.user} key={idx} />
             ))}
