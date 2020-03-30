@@ -6,5 +6,5 @@ export default {
 
 function formatTime(time) {
     let update = moment(time, "HHmm");
-    return update.format("hh:mm a")
+    return update.format("h:mma")
 }
