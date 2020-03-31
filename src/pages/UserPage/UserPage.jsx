@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     backgroundColor: 'white',
-    color: 'black'
+    color: 'black',
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -134,7 +134,7 @@ const UserPage = props => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h4" noWrap>
             yelp matcher
           </Typography>
         </Toolbar>

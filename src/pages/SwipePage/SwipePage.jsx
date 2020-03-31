@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { usePosition} from 'use-position';
 import restaurantService from '../../utils/restaurantService';
 import userService from '../../utils/userService';
-import Swipe from '../../components/Swipe/Swipe';
 import RestaurantDetailPage from '../RestaurantDetailPage/RestaurantDetailPage'
 
 const SwipePage = props => {
@@ -36,11 +35,7 @@ const SwipePage = props => {
     }, [latitude, longitude, offset, props.user._id])
     
     return (
-        <div>
-            <RestaurantDetailPage id={rests[resIdx].id}/>
-            {/* <button onClick={() => like(rests[resIdx].id)}>Like</button>
-            <button onClick={() => moveNext()}>Nah</button> */}
-        </div>
+        <RestaurantDetailPage id={rests[resIdx].id} like={like} moveNext={moveNext}/>
     )
 }
 
