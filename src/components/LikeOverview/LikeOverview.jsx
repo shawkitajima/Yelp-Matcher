@@ -9,7 +9,7 @@ const LikeOverview = props => {
     return (
         <div>
             <h1>
-                <img src={require(`../../components/Swipe/large_${details.rating}.png`)} alt="sorry"/>
+                <img src={require(`../../pages/RestaurantDetailPage/large_${details.rating}.png`)} alt="sorry"/>
                 {details.name}  {details.price}
             </h1>
         </div>
