@@ -65,7 +65,7 @@ const Swipe = props => {
                     <div>
                         <h2>Hours</h2>
                         {detail.hours[0].open.map((obj, idx) => (
-                            <p key={idx}>{weekdays[idx]} &nbsp; {utilities.formatTime(obj.start)} - {utilities.formatTime(obj.end)}</p>
+                            <p key={idx}>{weekdays[obj.day]} &nbsp; {utilities.formatTime(obj.start)} - {utilities.formatTime(obj.end)}</p>
                         ))}
                     </div>
                     <div>
