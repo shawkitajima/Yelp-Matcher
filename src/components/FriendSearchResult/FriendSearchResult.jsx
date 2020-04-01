@@ -1,7 +1,7 @@
 import React from 'react';
 import userService from '../../utils/userService';
 
-const SearchResult = props => {
+const FriendSearchResult = props => {
     const request = () => {
         userService.request(props.user._id, props.result.id).then(res => alert(res.message));
     }
@@ -13,4 +13,4 @@ const SearchResult = props => {
     )
 }
 
-export default SearchResult;
+export default FriendSearchResult;

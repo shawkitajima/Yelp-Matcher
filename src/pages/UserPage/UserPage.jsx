@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, useHistory } from 'react-router-dom';
 import userService from '../../utils/userService';
 import clsx from 'clsx';
 import { makeStyles, useTheme, StylesProvider } from '@material-ui/core/styles';
@@ -24,6 +24,7 @@ import NotificationsPage from '../NotificationsPage/NotificationsPage';
 import FriendPage from '../FriendPage/FriendPage';
 import MatchPage from '../MatchPage/MatchPage';
 import TopLikesPage from '../TopLikesPage/TopLikesPage';
+import SearchResultsPage from '../SearchResultsPage/SearchResultsPage';
 
 import styles from './UserPage.module.css';
 
@@ -90,6 +91,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const UserPage = props => {
+  const history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -104,6 +106,7 @@ const UserPage = props => {
 
   const [pending, setPending] = useState([]);
   const [notifications, setNotifications] = useState([]);
+  const [search, setSearch] = useState('');
   
   const getNotifications = () => {
     userService.getNotifications(props.user._id).then(res => {
@@ -115,6 +118,11 @@ const UserPage = props => {
   useEffect(() => {
     getNotifications()
   }, [props.user,])
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    history.push('/searchResults', {search});
+  }
 
 
   return (
@@ -139,6 +147,11 @@ const UserPage = props => {
           <Typography variant="h4" noWrap>
             <Link to='/' className={styles.logo}>yelp matcher</Link>
           </Typography>
+          <div className={styles.search}>
+            <form onSubmit={e => handleSubmit(e)}>
+              <input className={styles.inputBar} type="search" placeholder='Search restaurants...' onChange={e => setSearch(e.target.value)}/>
+            </form>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -216,6 +229,10 @@ const UserPage = props => {
               }/>
               <Route exact path='/topLikes' render={({history}) => (
                 <TopLikesPage user={props.user} />
+              )
+              }/>
+              <Route exact path='/searchResults' render={({history}) => (
+                <SearchResultsPage />
               )
               }/>
           </Switch>

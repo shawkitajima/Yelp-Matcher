@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import userService from '../../utils/userService';
-import SearchResult from '../../components/SearchResult/SearchResult';
+import FriendSearchResult from '../../components/FriendSearchResult/FriendSearchResult';
 
 const FriendSearchPage = props => {
     const [results, setResults] = useState([]);
@@ -27,7 +27,7 @@ const FriendSearchPage = props => {
                         <div>
                             <h2>We have results!</h2>
                             {results.map((result, idx) => (
-                                <SearchResult user={props.user} result={result} key={idx} />
+                                <FriendSearchResult user={props.user} result={result} key={idx} />
                             ))}
                         </div>
                     ) : 

@@ -5,6 +5,7 @@ export default {
     detail,
     reviews,
     topLikes,
+    search
 };
 
 
@@ -22,4 +23,8 @@ function reviews(id) {
 
 function topLikes() {
     return fetch(`${BASE_URL}/top`).then(res => res.json());
+}
+
+function search(search, lat, long) {
+    return fetch(`${BASE_URL}/search/${search}/${lat}/${long}`).then(res => res.json());
 }

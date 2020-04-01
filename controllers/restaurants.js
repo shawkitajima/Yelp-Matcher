@@ -5,7 +5,8 @@ module.exports = {
     restaurants,
     detail,
     reviews,
-    topLikes
+    topLikes,
+    searchRest,
 }
 
 function restaurants(req, res) {
@@ -102,4 +103,26 @@ function topLikes(req, res) {
         let sliced = likeArr.slice(0, 20);
         res.send(sliced);
     })
+}
+
+
+function searchRest(req, res) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + process.env.YELP_KEY 
+    };
+    const options = {
+        url: `https://api.yelp.com/v3/businesses/search?term=${req.params.search}&latitude=${req.params.lat}&longitude=${req.params.long}&limit=5&categories=food`,
+        headers: headers
+    };
+    function callback(error, response, body) {
+        if (error) console.log(error);
+        if (!error && response.statusCode == 200) {
+            let parsed = JSON.parse(body);
+            let results = parsed.businesses;
+            res.send(results);
+        }
+    }
+    request(options, callback);
 }

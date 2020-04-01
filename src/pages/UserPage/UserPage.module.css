@@ -6,3 +6,19 @@
 .logo:hover {
     cursor: pointer;
 }
+
+
+.search {
+    width: 30%;
+    margin-left: 56%;
+}
+
+.inputBar {
+    width: 100%;
+    border-radius: 15px;
+    border: 2px solid gray;
+    height: 2rem;
+    outline-width: 0;
+    font-size: 14px;
+    padding: 0px 20px;
+}
