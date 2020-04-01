@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import userService from '../../utils/userService';
-import LikeOverview from '../../components/LikeOverview/LikeOverview';
+import RestaurantOverview from '../../components/ResterauntOverview/RestaurantOverview';
+import styles from './LikePage.module.css'
 
 const LikePage = props => {
     const [likes, setLikes] = useState([]);
@@ -14,14 +15,11 @@ const LikePage = props => {
     }, [props.user])
 
     return (
-        <div>
-            <h1>Likes</h1>
+        <div className={styles.flexHori}>
             {likes.map((rest, idx) => (
-                <>
-                    < LikeOverview id={rest} user={props.user} key={idx} />
-                    <button onClick={() => userService.removeLike(props.user._id, rest).then(res => updateLikes())
-                    }>Remove</button>
-                </>
+                <div key={idx}>
+                    < RestaurantOverview id={rest} key={idx} />
+                </div>
             ))}
         </div>
     )
