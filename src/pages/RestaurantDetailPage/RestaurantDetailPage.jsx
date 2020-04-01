@@ -3,12 +3,16 @@ import restaurantService from '../../utils/restaurantService';
 import styles from './RestaurantDetailPage.module.css';
 import utilities from '../../utils/utilities';
 
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import ShareIcon from '@material-ui/icons/Share';
+import userService from '../../utils/userService';
 
 const Swipe = props => {
+
     const [detail, setDetail] = useState({});  
 
     const [loaded, setLoaded] = useState(false);
@@ -26,6 +30,20 @@ const Swipe = props => {
         });
         restaurantService.reviews(props.id).then(res => setReviews(res));
     }, [props.id]);
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
+    const share = friend => {
+        userService.share(friend, props.user.name, detail.name).then(res => alert(res.message));
+    }
 
     return (
         <div className={styles.padding}>
@@ -47,7 +65,21 @@ const Swipe = props => {
                         {detail.is_closed ? (<p>Closed</p>) : (<p>Open Until {utilities.formatTime(detail.hours[0].open[today].end)}</p>)}
                         <div className={styles.iconParent}>
                             <AddCircleIcon style={{ color: 'green', fontSize: 40 }} onClick={() => props.like(props.id)} />
-                            <ShareIcon style={{ color: 'blue', fontSize: 40 }} />
+                            <ShareIcon style={{ color: 'blue', fontSize: 40 }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} />
+                            <Menu
+                                id="simple-menu"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                open={Boolean(anchorEl)}
+                                onClose={handleClose}
+                            >
+                            {props.friends.map((friend, idx) => (
+                                <MenuItem onClick={() => {
+                                    handleClose();
+                                    share(friend);
+                                }} key={idx}>{friend.name}</MenuItem>
+                            ))}
+                            </Menu>
                             <CancelIcon style={{ color: 'red', fontSize: 40 }} onClick={() => props.moveNext()}/>
                         </div>
                     </div>

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 import userService from '../../utils/userService';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, StylesProvider } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -24,6 +24,8 @@ import NotificationsPage from '../NotificationsPage/NotificationsPage';
 import FriendPage from '../FriendPage/FriendPage';
 import MatchPage from '../MatchPage/MatchPage';
 import TopLikesPage from '../TopLikesPage/TopLikesPage';
+
+import styles from './UserPage.module.css';
 
 const drawerWidth = 240;
 
@@ -135,7 +137,7 @@ const UserPage = props => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h4" noWrap>
-            yelp matcher
+            <Link to='/' className={styles.logo}>yelp matcher</Link>
           </Typography>
         </Toolbar>
       </AppBar>

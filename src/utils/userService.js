@@ -20,6 +20,7 @@ export default {
     getFriends,
     deleteFriend,
     getMatches,
+    share,
   };
 
 
@@ -155,4 +156,13 @@ function deleteFriend(id, friend) {
 
 function getMatches(id, friend) {
   return fetch(BASE_URL + 'matches/' + id + '/' + friend).then(res => res.json());
+}
+
+function share(friend, name, rest) {
+  return fetch(BASE_URL + 'friends/share', {
+    method: 'POST',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify({friend, name, rest})
+  })
+  .then(res => res.json()); 
 }

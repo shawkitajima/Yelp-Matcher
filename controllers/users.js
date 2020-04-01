@@ -20,6 +20,7 @@ module.exports = {
   getFriends,
   deleteFriend,
   getMatches,
+  shareRest,
 };
 
 async function signup(req, res) {
@@ -237,6 +238,17 @@ function getMatches(req, res) {
     User.findById(req.params.friend, function(err, friend) {
       let matches = user.likes.filter(like => friend.likes.includes(like));
       res.send(matches);
+    });
+  });
+}
+
+function shareRest(req, res) {
+  User.findById(req.body.friend, function(err, friend) {
+    let message = `${req.body.name} recommended that you look at ${req.body.rest}!`;
+    let newNotifications = [message, ...friend.notifications];
+    User.findByIdAndUpdate(req.body.friend, {notifications: newNotifications}, function(err) {
+      if (err) console.log(err);
+      res.send({message: `${req.body.rest} was recommended to ${friend.name}`});
     });
   });
 }

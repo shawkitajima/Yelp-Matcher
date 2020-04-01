@@ -20,7 +20,7 @@ router.delete('/notifications/:id/:idx', usersCtrl.deleteNotification);
 router.get('/friends/:id', usersCtrl.getFriends);
 router.delete('/friend', usersCtrl.deleteFriend);
 router.get('/matches/:id/:friend', usersCtrl.getMatches);
-
+router.post('/friends/share', usersCtrl.shareRest);
 
 /*---------- Protected Routes ----------*/
 
