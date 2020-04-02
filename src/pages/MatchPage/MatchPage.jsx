@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import userService from '../../utils/userService';
+import friendService from '../../utils/friendService';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -54,7 +54,7 @@ const MatchPage = props => {
     const [selector, setSelector] = useState(0);
 
     useEffect(() => {
-        userService.getFriends(props.user._id).then(res => setFriends(res));
+        friendService.getFriends(props.user._id).then(res => setFriends(res));
     }, [props.user])
 
     return (

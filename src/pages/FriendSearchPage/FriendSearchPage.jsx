@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import userService from '../../utils/userService';
+import friendService from '../../utils/friendService';
 import FriendSearchResult from '../../components/FriendSearchResult/FriendSearchResult';
 
 const FriendSearchPage = props => {
@@ -8,7 +8,7 @@ const FriendSearchPage = props => {
     const [searched, setSearched] = useState(false);
 
     const searchFriends = () => {
-        userService.search(props.user._id, search).then(res => {
+        friendService.search(props.user._id, search).then(res => {
             setResults(res);
             setSearched(true);
         });

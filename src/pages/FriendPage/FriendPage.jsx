@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import userService from '../../utils/userService';
+import friendService from '../../utils/friendService';
 import FriendOverview from '../../components/FriendOverview/FriendOverview';
 
 const FriendPage = props => {
     const [friends, setFriends] = useState([]);
 
     const getFriends = () => {
-        userService.getFriends(props.user._id).then(res => setFriends(res));
+        friendService.getFriends(props.user._id).then(res => setFriends(res));
     }
 
     useEffect(() => {

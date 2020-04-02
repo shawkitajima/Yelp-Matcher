@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import userService from '../../utils/userService';
+import friendService from '../../utils/friendService';
 import LikeOverview from '../LikeOverview/LikeOverview';
 
 const MatchOverview = props => {
     const [matches, setMatches] = useState([]);
     
     useEffect(() => {
-        userService.getMatches(props.user._id, props.friend).then(res => setMatches(res));
+        friendService.getMatches(props.user._id, props.friend).then(res => setMatches(res));
     }, [props.friend])
 
     return (

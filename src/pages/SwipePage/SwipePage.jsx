@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { usePosition} from 'use-position';
 import restaurantService from '../../utils/restaurantService';
 import userService from '../../utils/userService';
+import friendService from '../../utils/friendService';
 import RestaurantDetailPage from '../RestaurantDetailPage/RestaurantDetailPage'
 
 const SwipePage = props => {
@@ -34,7 +35,7 @@ const SwipePage = props => {
 
     useEffect(() => {
         restaurantService.restaurants(latitude, longitude, props.user._id).then(res => setRests(res));
-        userService.getFriends(props.user._id).then(res => setFriends(res));
+        friendService.getFriends(props.user._id).then(res => setFriends(res));
     }, [latitude, longitude, offset, props.user._id])
     
     return (

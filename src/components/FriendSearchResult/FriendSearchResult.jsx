@@ -1,9 +1,9 @@
 import React from 'react';
-import userService from '../../utils/userService';
+import friendService from '../../utils/friendService';
 
 const FriendSearchResult = props => {
     const request = () => {
-        userService.request(props.user._id, props.result.id).then(res => alert(res.message));
+        friendService.request(props.user._id, props.result.id).then(res => alert(res.message));
     }
     return (
         <div>

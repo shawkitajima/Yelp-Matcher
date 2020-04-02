@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import restaurantService from '../../utils/restaurantService';
-import styles from './RestaurantDetailPage.module.css';
+import friendService from '../../utils/friendService';
 import utilities from '../../utils/utilities';
+import styles from './RestaurantDetailPage.module.css';
 
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -9,7 +10,6 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import ShareIcon from '@material-ui/icons/Share';
-import userService from '../../utils/userService';
 
 const Swipe = props => {
 
@@ -42,7 +42,7 @@ const Swipe = props => {
     };
 
     const share = friend => {
-        userService.share(friend, props.user.name, detail.name).then(res => alert(res.message));
+        friendService.share(friend, props.user.name, detail.name).then(res => alert(res.message));
     }
 
     return (

@@ -1,11 +1,11 @@
 import React from 'react';
-import userService from '../../utils/userService';
+import friendService from '../../utils/friendService';
 
 const FriendOverview = props => {
     return (
         <div>
             <h1>{props.friend.name}</h1>
-            <button onClick={() => {userService.deleteFriend(props.user._id, props.friend._id).then(res => props.getFriends())}}>Delete</button>
+            <button onClick={() => {friendService.deleteFriend(props.user._id, props.friend._id).then(res => props.getFriends())}}>Delete</button>
         </div>
     )
 }
