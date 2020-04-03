@@ -2,39 +2,100 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: black;
+    /* padding: 0rem 2rem; */
+}
+
+.firstSection {
+    background: gray;
+    color: white;
+    width: 100%;
+}
+
+.authSection {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.authBtn {
+    text-align: center;
+    border-radius: 15px;
+    border: 1px solid white;
+    padding: 0 2rem;
+    display: inline;
+    margin: 0 2rem;
+    margin-top: 0.5rem;
+}
+
+.authBtn > a {
+    text-decoration: none;
     color: white;
 }
 
-
-    
-.imgStyle {
-    width: 100%;
-    height: 40rem;
-    background-size: cover;
-    background-position: center;
-}
-
-.row {
+.logoSection {
     display: flex;
-    justify-content: space-around;
-    margin-top: 1rem;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2rem;
 }
 
-.exp {
-    margin: 0 15rem;
+.secondSection {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+.thirdSection {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 2rem 0rem;   
+}
+
+.feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.feature > p {
+    font-size: 14px;
     text-align: center;
+    width: 40%;
 }
 
-.row > div {
-    margin: 0 2rem;
-    height: 2rem;
-    margin-top: 0.5rem;
-    font-weight: 800;
-}
-
-.welcomePageBtn {
-    height: 2rem;
+.featureUnderline {
     width: 5rem;
-    font-weight: 800;
+    border-bottom: 3px solid black;
+}
+
+.featureImg {
+    width: 25rem;
+    height: 15rem;
+    border: 2px solid gray;
+}
+
+.fourthSection {
+    display: flex;
+    background-color: gray;
+    align-items: center;
+}
+
+.fourthSection > h1 {
+    width: 100%;
+    margin-right: 10rem;
+    margin-left: 10rem;
+}
+
+.fourthSection > p {
+    margin-right: 10rem;
+    text-align: left;
+}
+
+.fourthSection > * {
+    padding: 3rem 0rem;
+}
+
+footer {
+    color: gray;
+    margin-left: 83%;
 }
