@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import restaurantService from '../../utils/restaurantService';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import utilities from '../../utils/utilities';
 
 import styles from './QuickOverview.module.css';
 
@@ -46,7 +45,9 @@ const QuickOverview = props => {
                                     <span key={idx}>{category.title} &nbsp;</span>
                                 ))}
                             </p>
-                            {detail.is_closed ? (<p>Currently Closed</p>) : (<p>Open Until {utilities.formatTime(detail.hours[0].open[today].end)}</p>)}
+                            {/* HEYY */}
+                            {/* {detail.is_closed ? (<p>Currently Closed</p>) : (<p>Open Until {utilities.formatTime(detail.hours[0].open[today].end)}</p>)} */}
+                            {detail.is_closed ? (<p>Currently Closed</p>) : (<p>Open Now!</p>)}
                         </div>
                     </div>
                 </div>
