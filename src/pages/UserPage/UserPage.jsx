@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { Route, Switch, Link, useHistory } from 'react-router-dom';
 import userService from '../../utils/userService';
+import friendService from '../../utils/friendService';
+
 import clsx from 'clsx';
 import { makeStyles, useTheme, StylesProvider } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -107,6 +109,9 @@ const UserPage = props => {
   const [pending, setPending] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [search, setSearch] = useState('');
+
+  const [friends, setFriends] = useState([]);
+  const [showFriends, setShowFriends] = useState(false);
   
   const getNotifications = () => {
     userService.getNotifications(props.user._id).then(res => {
@@ -116,7 +121,8 @@ const UserPage = props => {
   }
 
   useEffect(() => {
-    getNotifications()
+    getNotifications();
+    friendService.getFriends(props.user._id).then(res => setFriends(res));
   }, [props.user,])
 
   const handleSubmit = e => {
@@ -176,9 +182,25 @@ const UserPage = props => {
             <ListItem button component={Link} to="/likes">
               <ListItemText primary='Likes' />
             </ListItem>
-            <ListItem button component={Link} to="/matches">
-              <ListItemText primary='Matches' />
-            </ListItem>
+            {!showFriends ? (
+              <ListItem button onClick={() => setShowFriends(!showFriends)}>
+                <ListItemText primary='Matches >' />
+              </ListItem>
+            ) : (
+              <>
+              <ListItem button onClick={() => setShowFriends(!showFriends)}>
+                <ListItemText primary='Matches v' />
+              </ListItem>
+              <Divider />
+              {friends.map((friend, idx) => (
+                <ListItem key={idx} button onClick={() => history.push('/matches', {friend})}>
+                  <ListItemText primary={friend.name} />
+                </ListItem>
+              ))}
+              <Divider />
+             </> 
+            )
+            }
             <ListItem button component={Link} to="/friends">
               <ListItemText primary='Friends' />
             </ListItem>
@@ -212,7 +234,7 @@ const UserPage = props => {
               )
               }/>
               <Route exact path='/matches' render={({history}) => (
-                  <MatchPage user={props.user} />
+                  < MatchPage user={props.user} />
               )
               }/>
               <Route exact path='/friends' render={({history}) => (
