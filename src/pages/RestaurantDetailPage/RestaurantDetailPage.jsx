@@ -62,7 +62,9 @@ const Swipe = props => {
                                 <span key={idx}>{category.title} &nbsp;</span>
                             ))}
                         </p>
-                        {detail.is_closed ? (<p>Closed</p>) : (<p>Open Until {utilities.formatTime(detail.hours[0].open[today].end)}</p>)}
+                        {/* HEYY */}
+                        {/* {detail.is_closed ? (<p>Closed</p>) : (<p>Open Until {utilities.formatTime(detail.hours[0].open[today].end)}</p>)} */}
+                        {detail.is_closed ? (<p>Closed</p>) : (<p>Open Now!</p>)}
                         <div className={styles.iconParent}>
                             <AddCircleIcon style={{ color: 'green', fontSize: 40 }} onClick={() => props.like(props.id)} />
                             <ShareIcon style={{ color: 'blue', fontSize: 40 }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} />
@@ -96,9 +98,10 @@ const Swipe = props => {
                     </div>
                     <div>
                         <h2>Hours</h2>
-                        {detail.hours[0].open.map((obj, idx) => (
+                        {/* HEYY */}
+                        {/* {detail.hours[0].open.map((obj, idx) => (
                             <p key={idx}>{weekdays[obj.day]} &nbsp; {utilities.formatTime(obj.start)} - {utilities.formatTime(obj.end)}</p>
-                        ))}
+                        ))} */}
                     </div>
                     <div>
                         <h2>Recommended Reviews</h2>
