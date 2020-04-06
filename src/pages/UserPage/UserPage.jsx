@@ -193,7 +193,7 @@ const UserPage = props => {
               </ListItem>
               <Divider />
               {friends.map((friend, idx) => (
-                <ListItem key={idx} button onClick={() => history.push('/matches', {friend})}>
+                <ListItem key={idx} button component={Link} to={`/matches/${props.user._id}/${friend._id}/${friend.name}`}>
                   <ListItemText primary={friend.name} />
                 </ListItem>
               ))}
@@ -233,7 +233,7 @@ const UserPage = props => {
                   <LikePage user={props.user} />
               )
               }/>
-              <Route exact path='/matches' render={({history}) => (
+              <Route exact path='/matches/:id/:friend/:name' render={({history}) => (
                   < MatchPage user={props.user} />
               )
               }/>
