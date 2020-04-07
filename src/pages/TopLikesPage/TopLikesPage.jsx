@@ -14,7 +14,7 @@ const TopLikesPage = props => {
 
     return (
         <div>
-            <h1>Here are the top liked restaurants across all users</h1>
+            <h1>Here are the top liked restaurants across all users right now!</h1>
             <div className={styles.flexHori}>
                 {topLikes.map((rest, idx) => (
                     < RestaurantOverview id={rest.like} user={props.user} key={idx} />
