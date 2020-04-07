@@ -48,8 +48,8 @@ function like(req, res) {
   console.log(req.body);
   User.findById(req.body.id, function(err, user) {
     let likes = user.likes;
-    if (likes.includes(req.body.id)) {
-      return res.send('already liked!')
+    if (likes.includes(req.body.rest)) {
+      return res.send({message: 'already liked!'})
     }
     likes.push(req.body.rest);
     User.findByIdAndUpdate(req.body.id, {likes}, {new: true}, function(err, newUser) {

@@ -11,7 +11,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 import ShareIcon from '@material-ui/icons/Share';
 
-const Swipe = props => {
+const RestaurantDetailPage = props => {
 
     const [detail, setDetail] = useState({});  
 
@@ -64,8 +64,9 @@ const Swipe = props => {
                         </p>
                         {/* HEYY */}
                         {/* {detail.is_closed ? (<p>Closed</p>) : (<p>Open Until {utilities.formatTime(detail.hours[0].open[today].end)}</p>)} */}
-                        {detail.is_closed ? (<p>Closed</p>) : (<p>Open Now!</p>)}
-                        <div className={styles.iconParent}>
+                        {detail.is_closed ? (<p style={{color: 'red'}}>Closed</p>) : (<p style={{color: 'green'}}>Open Now!</p>)}
+                        {props.swipe ? (
+                            <div className={styles.iconParent}>
                             <AddCircleIcon style={{ color: 'green', fontSize: 40 }} onClick={() => props.like(props.id)} />
                             <ShareIcon style={{ color: 'blue', fontSize: 40 }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} />
                             <Menu
@@ -84,6 +85,26 @@ const Swipe = props => {
                             </Menu>
                             <CancelIcon style={{ color: 'red', fontSize: 40 }} onClick={() => props.moveNext()}/>
                         </div>
+                        ): (
+                        <div className={styles.iconParent}>
+                            <AddCircleIcon style={{ color: 'green', fontSize: 40 }} onClick={() => props.like(props.id)} />
+                            <ShareIcon style={{ color: 'blue', fontSize: 40 }} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} />
+                            <Menu
+                                id="simple-menu"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                open={Boolean(anchorEl)}
+                                onClose={handleClose}
+                            >
+                            {props.friends.map((friend, idx) => (
+                                <MenuItem onClick={() => {
+                                    handleClose();
+                                    share(friend);
+                                }} key={idx}>{friend.name}</MenuItem>
+                            ))}
+                            </Menu>
+                        </div>
+                        )}
                     </div>
                     <div><img className={styles.restImg} src={detail.photos[0]} alt=""/></div>
                     <div><img className={styles.restImg} src={detail.photos[1]} alt=""/></div>
@@ -127,4 +148,4 @@ const Swipe = props => {
     )
 }
 
-export default Swipe;
+export default RestaurantDetailPage;

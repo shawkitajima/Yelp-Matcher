@@ -39,7 +39,7 @@ const SwipePage = props => {
     }, [latitude, longitude, offset, props.user._id])
     
     return (
-        <RestaurantDetailPage id={rests[resIdx].id} like={like} moveNext={moveNext} user={props.user} friends={friends}/>
+        <RestaurantDetailPage id={rests[resIdx].id} like={like} moveNext={moveNext} user={props.user} friends={friends} swipe={true}/>
     )
 }
 

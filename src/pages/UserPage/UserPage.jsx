@@ -27,6 +27,7 @@ import FriendPage from '../FriendPage/FriendPage';
 import MatchPage from '../MatchPage/MatchPage';
 import TopLikesPage from '../TopLikesPage/TopLikesPage';
 import SearchResultsPage from '../SearchResultsPage/SearchResultsPage';
+import NonSwipeDetailPage from '../NonSwipeDetailPage/NonSwipeDetailPage';
 
 import styles from './UserPage.module.css';
 
@@ -257,6 +258,10 @@ const UserPage = props => {
               }/>
               <Route exact path='/searchResults' render={({history}) => (
                 <SearchResultsPage />
+              )
+              }/>
+              <Route exact path='/detail/:id' render={({history}) => (
+                <NonSwipeDetailPage user={props.user} />
               )
               }/>
           </Switch>
