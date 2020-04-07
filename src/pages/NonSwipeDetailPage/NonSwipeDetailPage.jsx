@@ -11,6 +11,7 @@ const NonSwipeDetailPage = props => {
 
 
     const like = (rest) => {
+        userService.see(props.user._id, rest);
         userService.like(props.user._id, rest).then(res => {
             res.message && console.log(res.message)
         });
