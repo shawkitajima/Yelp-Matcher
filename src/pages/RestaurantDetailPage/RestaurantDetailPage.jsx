@@ -42,7 +42,7 @@ const Swipe = props => {
     };
 
     const share = friend => {
-        friendService.share(friend, props.user.name, detail.name).then(res => alert(res.message));
+        friendService.share(friend, props.user.name, detail.name, detail.id).then(res => alert(res.message));
     }
 
     return (
@@ -109,6 +109,7 @@ const Swipe = props => {
                             <div key={idx}>
                                 <div className={styles.ratings}>
                                     <span>Rating: &nbsp;</span><img className={styles.starImg} src={require(`./large_${review.rating}.png`)} alt="sorry"/>
+                                    <span>&nbsp;{utilities.formatDate(review.time_created)}</span>
                                 </div>
                                 <p>{review.text}</p>
                             </div>

@@ -108,6 +108,7 @@ const UserPage = props => {
 
   const [pending, setPending] = useState([]);
   const [notifications, setNotifications] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
   const [search, setSearch] = useState('');
 
   const [friends, setFriends] = useState([]);
@@ -117,6 +118,7 @@ const UserPage = props => {
     userService.getNotifications(props.user._id).then(res => {
       setPending(res.pending);
       setNotifications(res.notifications);
+      setRecommendations(res.recommendations);
     })
   }
 
@@ -246,7 +248,7 @@ const UserPage = props => {
               )
               }/>
               <Route exact path='/notifications' render={({history}) => (
-                <NotificationsPage user={props.user} pending={pending} notifications={notifications} getNotifications={getNotifications} />
+                <NotificationsPage user={props.user} pending={pending} notifications={notifications} recommendations={recommendations} getNotifications={getNotifications} />
               )
               }/>
               <Route exact path='/topLikes' render={({history}) => (

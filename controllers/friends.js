@@ -123,11 +123,26 @@ function getMatches(req, res) {
   });
 }
 
+// function shareRest(req, res) {
+//   User.findById(req.body.friend, function(err, friend) {
+//     let message = `${req.body.name} recommended that you look at ${req.body.rest}!`;
+//     let newNotifications = [message, ...friend.notifications];
+//     User.findByIdAndUpdate(req.body.friend, {notifications: newNotifications}, function(err) {
+//       if (err) console.log(err);
+//       res.send({message: `${req.body.rest} was recommended to ${friend.name}`});
+//     });
+//   });
+// }
+
 function shareRest(req, res) {
   User.findById(req.body.friend, function(err, friend) {
-    let message = `${req.body.name} recommended that you look at ${req.body.rest}!`;
-    let newNotifications = [message, ...friend.notifications];
-    User.findByIdAndUpdate(req.body.friend, {notifications: newNotifications}, function(err) {
+    let newReccomendation = {
+      name: req.body.name,
+      rest: req.body.rest,
+      restId: req.body.restId
+    };
+    let updatedRecommendations = [newReccomendation, ...friend.recommendations];
+    User.findByIdAndUpdate(req.body.friend, {recommendations: updatedRecommendations}, function(err) {
       if (err) console.log(err);
       res.send({message: `${req.body.rest} was recommended to ${friend.name}`});
     });

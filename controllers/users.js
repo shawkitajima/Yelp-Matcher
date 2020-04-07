@@ -11,6 +11,7 @@ module.exports = {
   see,
   getNotifications,
   deleteNotification,
+  deleteRecommendation,
 };
 
 async function signup(req, res) {
@@ -91,7 +92,8 @@ function getNotifications(req, res) {
   .exec(function(err, user) {
     let pending = user.pending;
     let notifications = user.notifications;
-    res.send({pending, notifications});
+    let recommendations = user.recommendations
+    res.send({pending, notifications, recommendations});
   })
 }
 
@@ -99,6 +101,16 @@ function deleteNotification(req, res) {
   User.findById(req.params.id, function(err, user) {
     user.notifications.splice(req.params.idx, 1);
     User.findByIdAndUpdate(req.params.id, {notifications: user.notifications}, function(err, newUser) {
+      if (err) console.log(err);
+      res.send({message: 'mission accomplished'});
+    });
+  });
+}
+
+function deleteRecommendation(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    user.recommendations.splice(req.params.idx, 1);
+    User.findByIdAndUpdate(req.params.id, {recommendations: user.recommendations}, function(err, newUser) {
       if (err) console.log(err);
       res.send({message: 'mission accomplished'});
     });

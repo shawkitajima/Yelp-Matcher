@@ -12,6 +12,7 @@ export default {
     removeLike,
     getNotifications,
     deleteNotification,
+    deleteRecommendation,
   };
 
 
@@ -86,6 +87,14 @@ function getNotifications(id) {
 
 function deleteNotification(id, idx) {
   return fetch(BASE_URL + 'notifications/' + id + '/' + idx, {
+    method: 'DELETE',
+    headers: new Headers({'Content-Type': 'application/json'}),
+  })
+  .then(res => res.json());
+}
+
+function deleteRecommendation(id, idx) {
+  return fetch(BASE_URL + 'recommendations/' + id + '/' + idx, {
     method: 'DELETE',
     headers: new Headers({'Content-Type': 'application/json'}),
   })

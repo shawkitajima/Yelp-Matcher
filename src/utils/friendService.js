@@ -59,11 +59,11 @@ function getMatches(id, friend) {
   return fetch(BASE_URL + 'matches/' + id + '/' + friend).then(res => res.json());
 }
 
-function share(friend, name, rest) {
+function share(friend, name, rest, restId) {
   return fetch(BASE_URL + 'share', {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
-    body: JSON.stringify({friend, name, rest})
+    body: JSON.stringify({friend, name, rest, restId})
   })
   .then(res => res.json()); 
 }

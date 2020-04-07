@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   seen: [],
   friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   pending: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  recommendations: [],
   yelpOffset: {
     type: Number,
     default: 0

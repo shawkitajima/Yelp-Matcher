@@ -64,6 +64,7 @@ const RestaurantOverview = props => {
                             <div key={idx}>
                                 <div className={styles.ratings}>
                                     <span>Rating: &nbsp;</span><img className={styles.starImg} src={require(`../../pages/RestaurantDetailPage/large_${review.rating}.png`)} alt="sorry"/>
+                                    <span>&nbsp;{utilities.formatDate(review.time_created)}</span>
                                 </div>
                                 <p>{review.text}</p>
                                 <br/>
