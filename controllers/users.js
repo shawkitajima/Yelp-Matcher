@@ -12,6 +12,7 @@ module.exports = {
   getNotifications,
   deleteNotification,
   deleteRecommendation,
+  getRejections,
 };
 
 async function signup(req, res) {
@@ -117,6 +118,12 @@ function deleteRecommendation(req, res) {
   });
 }
 
+function getRejections(req,res) {
+  User.findById(req.params.id, function(err, user) {
+    let rejections = user.seen.filter(rest => !user.likes.includes(rest));
+    res.send(rejections);
+  });
+}
 
 
 // Make helper functions for JWT

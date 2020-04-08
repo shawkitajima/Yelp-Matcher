@@ -28,6 +28,7 @@ import MatchPage from '../MatchPage/MatchPage';
 import TopLikesPage from '../TopLikesPage/TopLikesPage';
 import SearchResultsPage from '../SearchResultsPage/SearchResultsPage';
 import NonSwipeDetailPage from '../NonSwipeDetailPage/NonSwipeDetailPage';
+import RejectionsPage from '../RejectionsPage/RejectionsPage';
 
 import styles from './UserPage.module.css';
 
@@ -216,6 +217,9 @@ const UserPage = props => {
             <ListItem button component={Link} to="/topLikes">
               <ListItemText primary='Top Likes' />
             </ListItem>
+            <ListItem button component={Link} to="/rejections">
+              <ListItemText primary='Rejections' />
+            </ListItem>
             <ListItem button onClick={() => props.handleLogout()}>
               <ListItemText primary='Logout' />
             </ListItem>
@@ -262,6 +266,10 @@ const UserPage = props => {
               }/>
               <Route exact path='/detail/:id' render={({history}) => (
                 <NonSwipeDetailPage user={props.user} />
+              )
+              }/>
+              <Route exact path='/rejections' render={({history}) => (
+                <RejectionsPage user={props.user} />
               )
               }/>
           </Switch>

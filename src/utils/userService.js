@@ -13,6 +13,7 @@ export default {
     getNotifications,
     deleteNotification,
     deleteRecommendation,
+    getRejections,
   };
 
 
@@ -99,4 +100,8 @@ function deleteRecommendation(id, idx) {
     headers: new Headers({'Content-Type': 'application/json'}),
   })
   .then(res => res.json());
+}
+
+function getRejections(id) {
+  return fetch(BASE_URL + 'rejected/' + id).then(res => res.json());
 }

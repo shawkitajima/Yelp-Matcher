@@ -12,6 +12,7 @@ router.delete('/likes/:id/:rest', usersCtrl.removeLike);
 router.get('/notifications/:id', usersCtrl.getNotifications);
 router.delete('/notifications/:id/:idx', usersCtrl.deleteNotification);
 router.delete('/recommendations/:id/:idx', usersCtrl.deleteRecommendation);
+router.get('/rejected/:id', usersCtrl.getRejections);
 
 /*---------- Protected Routes ----------*/
 
