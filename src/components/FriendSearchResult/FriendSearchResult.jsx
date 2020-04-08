@@ -3,7 +3,10 @@ import friendService from '../../utils/friendService';
 
 const FriendSearchResult = props => {
     const request = () => {
-        friendService.request(props.user._id, props.result.id).then(res => alert(res.message));
+        friendService.request(props.user._id, props.result.id).then(res => {
+            props.setMessage(res.message)
+            props.setOpen(true);
+        });
     }
     return (
         <div>
