@@ -50,11 +50,17 @@ function like(req, res) {
   User.findById(req.body.id, function(err, user) {
     let likes = user.likes;
     if (likes.includes(req.body.rest)) {
-      return res.send({message: 'already liked!'})
+      return res.send({
+        message: `You already like ${req.body.name}!`,
+        severity: 'warning'
+      })
     }
     likes.push(req.body.rest);
     User.findByIdAndUpdate(req.body.id, {likes}, {new: true}, function(err, newUser) {
-      res.send(newUser);
+      res.send({
+        message: `${req.body.name} was liked!`,
+        severity: 'success'
+      });
     });
   });
 }

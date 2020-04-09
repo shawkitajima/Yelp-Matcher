@@ -53,11 +53,11 @@ function login(creds) {
   .then(({token}) => tokenService.setToken(token));
 }
 
-function like(id, rest) {
+function like(id, rest, name) {
   return fetch(BASE_URL + 'like', {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
-    body: JSON.stringify({id, rest})
+    body: JSON.stringify({id, rest, name})
   })
   .then(res => res.json());
 }
