@@ -24,6 +24,7 @@ const FriendSearchPage = props => {
     const [search, setSearch] = useState('');
     const [searched, setSearched] = useState(false);
     const [message, setMessage] = useState('');
+    const [severity, setSeverity] = useState('success');
     const [open, setOpen] = useState(false);
 
     const searchFriends = () => {
@@ -57,10 +58,10 @@ const FriendSearchPage = props => {
                         <div>
                             <h2>We have results!</h2>
                             {results.map((result, idx) => (
-                                <FriendSearchResult user={props.user} result={result} key={idx} setMessage={setMessage} setOpen={setOpen} />
+                                <FriendSearchResult user={props.user} result={result} key={idx} setMessage={setMessage} setOpen={setOpen} setSeverity={setSeverity} />
                             ))}
-                                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                                    <Alert onClose={handleClose} severity="success">
+                                <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
+                                    <Alert onClose={handleClose} severity={severity}>
                                         {message}
                                     </Alert>
                                 </Snackbar>

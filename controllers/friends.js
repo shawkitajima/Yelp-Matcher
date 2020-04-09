@@ -37,18 +37,30 @@ function friendRequest(req, res) {
     User.findById(req.body.friend, function(err, friend) {
       // we don't want to ask friends to be friends again
       if (user.pending.includes(req.body.friend)) {
-        return res.send({message: 'this person already sent you a friend request!'});
+        return res.send({
+          message: 'this person already sent you a friend request!',
+          severity: 'warning'
+        });
       }
       if (friend.friends.includes(req.body.id)) {
-        return res.send({message: 'you are already friends!'});
+        return res.send({
+          message: 'you are already friends!',
+          severity: 'warning'
+        });
       }
       if (friend.pending.includes(req.body.id)) {
-        return res.send({message: 'your request is already pending'});
+        return res.send({
+          message: 'your request is already pending',
+          severity: 'warning'
+        });
       }
       pending = friend.pending;
       pending.push(req.body.id);
       User.findByIdAndUpdate(req.body.friend, {pending}, {new: true}, function(err, newFriend) {
-        res.send({message: 'Friend Request Sent!'});
+        res.send({
+          message: `Your friend request to ${friend.name} was sent!`,
+          severity: 'success'
+        });
       });
     });
   })
@@ -58,7 +70,10 @@ function acceptRequest(req, res) {
   User.findById(req.body.id, function(err, user) {
     // we don't want to allow duplicate acceptances
     if (user.friends.includes(req.body.friend)) {
-      return res.send({message: 'already friended!'});
+      return res.send({
+        message: 'this person is already your friend',
+        severity: 'warning'
+      });
     }
     let newPending = user.pending.filter(id => id != req.body.friend);
     let newFriends = [...user.friends, req.body.friend];
@@ -71,7 +86,10 @@ function acceptRequest(req, res) {
         let friendFriends = [...friend.friends, req.body.id];
         let friendNotifications = [...friend.notifications, `${user.name} accepted your friend request!`];
         User.findByIdAndUpdate(req.body.friend, {friends: friendFriends, notifications: friendNotifications}, function(err, newFriend) {
-          res.send({message: newUser.pending});
+          res.send({
+            message: `${friend.name} has been added as a friend`,
+            severity: 'success'
+          });
         });
       });
     });

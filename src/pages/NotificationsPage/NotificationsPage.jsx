@@ -1,17 +1,53 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import PendingRequest from '../../components/PendingRequest/PendingRequest';
 import NotificationOverview from '../../components/NotificationOverview/NotificationOverview';
 import userService from '../../utils/userService';
 
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+      '& > * + *': {
+        marginTop: theme.spacing(2),
+      },
+    },
+  }));
+
+
 const NotificationsPage = props => {
+
+    const [message, setMessage] = useState('');
+    const [severity, setSeverity] = useState('success');
+    const [open, setOpen] = useState(false);
+
+    const classes = useStyles();
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
 
     useEffect(() => {
         props.getNotifications()
       }, [])
     
     return (
-        <div>
+        <div className={classes.root}>
+            <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={severity}>
+                    {message}
+                </Alert>
+            </Snackbar>
             {props.notifications.length + props.pending.length + props.recommendations.length  ? (
             <div>
                 <h1>Here are your notifications</h1>
@@ -20,7 +56,7 @@ const NotificationsPage = props => {
                             <h2>You have friend requests pending!</h2>
                             {props.pending.map((request, idx) => (
                                 <div key={idx}>
-                                    <PendingRequest pending={request}  user={props.user} getNotifications={props.getNotifications}/>
+                                    <PendingRequest pending={request}  user={props.user} getNotifications={props.getNotifications} setMessage={setMessage} setOpen={setOpen} setSeverity={setSeverity}/>
                                 </div>
                             ))}
                         </div>
