@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
-import './LoginPage.css';
+import styles from './LoginPage.module.css';
 
 class LoginPage extends Component {
   
@@ -20,7 +20,7 @@ class LoginPage extends Component {
     e.preventDefault();
     try {
       await userService.login(this.state);
-      // Successfully logged up - show GamePage
+      // Successfully logged up - show user page
       this.props.handleSignupOrLogin();
       this.props.history.push('/');
     } catch (err) {
@@ -31,26 +31,33 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="LoginPage">
-        <header className="header-footer">Log In</header>
-        <form className="form-horizontal" onSubmit={this.handleSubmit} >
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
-            </div>
+      <div className={styles.container}>
+        <div>
+          <header className={styles.header}>yelp matcher</header>
+          <div className={styles.form}>
+            <h2>Login to yelp matcher</h2>
+            <form onSubmit={this.handleSubmit} >
+              <div>
+                <div>
+                  <input className={styles.formInput} type="email" placeholder="Email Address" value={this.state.email} name="email" onChange={this.handleChange} />
+                </div>
+              </div>
+              <div>
+                <div>
+                  <input className={styles.formInput} type="password" placeholder="Password" value={this.state.pw} name="pw" onChange={this.handleChange} />
+                </div>
+              </div>
+              <div>
+                <div>
+                  <button className={styles.signIn}>Sign In</button>&nbsp;&nbsp;&nbsp;
+                </div>
+              </div>
+            </form>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="password" className="form-control" placeholder="Password" value={this.state.pw} name="pw" onChange={this.handleChange} />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12 text-center">
-              <button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;
-              <Link to='/'>Cancel</Link>
-            </div>
-          </div>
-        </form>
+        </div>
+        <div className={styles.picture}>
+          <h1>Picture</h1>
+        </div>
       </div>
     );
   }

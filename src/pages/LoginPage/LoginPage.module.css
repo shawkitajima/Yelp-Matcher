@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+}
+
+.container > div:first-child {
+  width: 60%;
+}
+
+.container > div:last-child {
+  width: 40%;
+  color: green;
+}
+
+.header {
+  font-size: 2rem;
+  color: gray;
+  font-weight: 800;
+  letter-spacing: 0.25rem;
+  padding-left: 2rem;
+}
+
+.form {
+  position: fixed;
+  top: 50%;
+  left: 20%;
+  /* bring your own prefixes */
+  transform: translate(-30%, -50%);
+}
+
+.formInput {
+  width: 20rem;
+  height: 2rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.15rem;
+  box-sizing:border-box;
+  -moz-box-sizing: border-box;
+}
+
+.formInput:focus {
+  outline: none;
+}
+
+.signIn {
+  width: 20rem;
+  height: 2.2rem;
+  background-color: #938B8B;
+  color: white;
+  font-size: 1rem;
+
+}
