@@ -34,7 +34,10 @@ const SwipePage = props => {
     }
 
     useEffect(() => {
-        restaurantService.restaurants(latitude, longitude, props.user._id).then(res => setRests(res));
+        restaurantService.restaurants(latitude, longitude, props.user._id).then(res => {
+            setRests(res);
+            userService.setLocation(props.user._id, res[0].location.city);
+        });
         friendService.getFriends(props.user._id).then(res => setFriends(res));
     }, [latitude, longitude, offset, props.user._id])
     

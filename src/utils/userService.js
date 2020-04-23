@@ -14,6 +14,7 @@ export default {
     deleteNotification,
     deleteRecommendation,
     getRejections,
+    setLocation,
   };
 
 
@@ -104,4 +105,13 @@ function deleteRecommendation(id, idx) {
 
 function getRejections(id) {
   return fetch(BASE_URL + 'rejected/' + id).then(res => res.json());
+}
+
+function setLocation(id, location) {
+  return fetch(BASE_URL + 'location', {
+    method: 'POST',
+    headers: new Headers({'Content-Type': 'application/json'}),
+    body: JSON.stringify({id, location})
+  })
+  .then(res => res);
 }

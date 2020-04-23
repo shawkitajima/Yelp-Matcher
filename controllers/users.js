@@ -13,6 +13,7 @@ module.exports = {
   deleteNotification,
   deleteRecommendation,
   getRejections,
+  setLocation,
 };
 
 async function signup(req, res) {
@@ -128,6 +129,13 @@ function getRejections(req,res) {
   User.findById(req.params.id, function(err, user) {
     let rejections = user.seen.filter(rest => !user.likes.includes(rest));
     res.send(rejections);
+  });
+}
+
+function setLocation(req, res) {
+  User.findByIdAndUpdate(req.body.id, {location: req.body.location}, function(err, updatedUser) {
+    if (err) console.log(err);
+    res.send('location updated')
   });
 }
 
