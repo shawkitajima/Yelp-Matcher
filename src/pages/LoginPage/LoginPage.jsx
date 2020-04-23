@@ -53,10 +53,13 @@ class LoginPage extends Component {
                 </div>
               </div>
             </form>
+            <div className={styles.underline}>
+              <p>New User? <Link style={{textDecoration: 'none', fontWeight: 600, color: 'gray'}} to='/signup'>create your account</Link></p>
+            </div>
           </div>
         </div>
         <div className={styles.picture}>
-          <h1>Picture</h1>
+          <img className={styles.sideImg} src={require('./pancakes.jpg')} alt=""/>
         </div>
       </div>
     );
