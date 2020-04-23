@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
+import styles from '../../pages/LoginPage/LoginPage.module.css';
 
 class SignupForm extends Component {
 
@@ -39,32 +40,39 @@ class SignupForm extends Component {
   render() {
     return (
       <div>
-        <header className="header-footer">Sign Up</header>
-        <form className="form-horizontal" onSubmit={this.handleSubmit} >
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="text" className="form-control" placeholder="Name" value={this.state.name} name="name" onChange={this.handleChange} />
+        <header className={styles.header}>yelp matcher</header>
+        <form className={styles.form} onSubmit={this.handleSubmit} >
+          <div>
+            <h1>Create Account</h1>
+            <p>No credit cards or email authentication required, we are just that cool</p>
+            <div>
+              <input className={styles.formInput} type="text" placeholder="Name" value={this.state.name} name="name" onChange={this.handleChange} />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
+          <div>
+            <div>
+              <input className={styles.formInput} type="email" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="password" className="form-control" placeholder="Password" value={this.state.password} name="password" onChange={this.handleChange} />
+          <div>
+            <div>
+              <input className={styles.formInput} type="password" placeholder="Password" value={this.state.password} name="password" onChange={this.handleChange} />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <input type="password" className="form-control" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
+          <div>
+            <div>
+              <input className={styles.formInput} type="password" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12 text-center">
-              <button className="btn btn-default" disabled={this.isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
-              <Link to='/'>Cancel</Link>
+          <div>
+            <div>
+              <button className={styles.signIn} disabled={this.isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
+            </div>
+            <div className={styles.disclose}>
+              <p>By clicking "Sign Up" I agree to the Terms of Service and Privacy Policy</p>
+            </div>
+            <div className={styles.loginLink}>
+              <p>Already have an account? <Link style={{textDecoration: 'none', fontWeight: 600, color: 'gray'}} to='/login'>Login</Link></p>
             </div>
           </div>
         </form>

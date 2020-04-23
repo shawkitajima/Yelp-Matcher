@@ -8,7 +8,6 @@
 
 .container > div:last-child {
   width: 50%;
-  color: green;
 }
 
 .header {
@@ -50,13 +49,29 @@
 
 .underline {
   width: 40rem;
-  border-top: 2px solid gray;
+  border-top: 1px solid gray;
   margin-top: 1rem;
   text-align: center;
   color: gray;
 }
 
 .sideImg {
-  max-width: 100%;
+  width: 100%;
   height: auto;
+  max-height: 100vh;
+}
+
+.disclose {
+  width: 40rem;
+  text-align: center;
+  color: gray;
+  font-size: 10px;
+  padding: 0.5rem 0rem;
+  border-bottom: 1px solid gray;
+}
+
+.loginLink {
+  text-align: center;
+  font-size: 12px;
+  color: gray;
 }

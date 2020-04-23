@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SignupForm from '../../components/SignupForm/SignupForm';
-import './SignupPage.css';
+import styles from '../LoginPage/LoginPage.module.css';
 
 class SignupPage extends Component {
   constructor(props) {
@@ -14,9 +14,14 @@ class SignupPage extends Component {
 
   render() {
     return (
-      <div className='SignupPage'>
-        <SignupForm {...this.props} updateMessage={this.updateMessage} />
-        <p>{this.state.message}</p>
+      <div className={styles.container}>
+        <div>
+          <SignupForm {...this.props} updateMessage={this.updateMessage} />
+          <p>{this.state.message}</p>
+        </div>
+        <div className={styles.picture}>
+          <img className={styles.sideImg} src={require('./tacos.jpg')} alt=""/>
+        </div>
       </div>
     );
   }
