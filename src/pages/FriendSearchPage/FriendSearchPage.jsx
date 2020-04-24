@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import friendService from '../../utils/friendService';
+import styles from './FriendSearchPage.module.css';
+
 import FriendSearchResult from '../../components/FriendSearchResult/FriendSearchResult';
+import MaybeRequest from '../../components/MaybeRequest/MaybeRequest';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -26,6 +29,18 @@ const FriendSearchPage = props => {
     const [message, setMessage] = useState('');
     const [severity, setSeverity] = useState('success');
     const [open, setOpen] = useState(false);
+    const [maybe, setMaybe] = useState([]);
+
+    const addToMaybe = friend => {
+        const newMaybe = [...maybe, friend];
+        setMaybe(newMaybe);
+    }
+
+    const removeMaybe = idx => {
+        const newMaybe = [...maybe];
+        newMaybe.splice(idx, 1);
+        setMaybe(newMaybe);
+    }
 
     const searchFriends = () => {
         friendService.search(props.user._id, search).then(res => {
@@ -55,11 +70,20 @@ const FriendSearchPage = props => {
             {searched && (
                 <div>
                     {results.length ? (
-                        <div>
-                            <h2>We have results!</h2>
-                            {results.map((result, idx) => (
-                                <FriendSearchResult user={props.user} result={result} key={idx} setMessage={setMessage} setOpen={setOpen} setSeverity={setSeverity} />
-                            ))}
+                        <div className={styles.container}>
+                            <div className={styles.results}>
+                                {results.map((result, idx) => (
+                                    <FriendSearchResult user={props.user} result={result} key={idx} setMessage={setMessage} setOpen={setOpen} setSeverity={setSeverity} addToMaybe={addToMaybe}/>
+                                ))}
+                            </div>
+                            {maybe.length > 0  && (
+                                <div className={styles.maybe}>
+                                    {maybe.map((result, idx) => (
+                                        <MaybeRequest result={result} key={idx} idx={idx} removeMaybe={removeMaybe}/>
+                                    ))}
+                                    <button>Send Friend Request</button>
+                                </div>
+                            )}
                                 <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
                                     <Alert onClose={handleClose} severity={severity}>
                                         {message}

@@ -1,0 +1,16 @@
+.results {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70rem;
+}
+
+.container {
+    display: flex;
+}
+
+.maybe {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border: 2px solid black;
+}
