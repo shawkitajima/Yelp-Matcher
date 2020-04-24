@@ -22,9 +22,12 @@ function search(req, res) {
     users.forEach(user => {
       // don't include users that match the current user
       if (user._id != req.params.id) {
+        let rate = user.likes.length / user.seen.length;
         response.push({
           name: user.name,
-          id: user._id
+          id: user._id,
+          rate,
+          location: user.location,
         });
       }
     });
