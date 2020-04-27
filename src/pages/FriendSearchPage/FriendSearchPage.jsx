@@ -72,36 +72,36 @@ const FriendSearchPage = props => {
                 <input type="text" onChange={e => setSearch(e.target.value)}/>
                 <button onClick={() => searchFriends()}>Search</button>
             </div>
+            <div className={styles.container}>
             {searched && (
                 <div>
                     {results.length ? (
-                        <div className={styles.container}>
                             <div className={styles.results}>
                                 {results.map((result, idx) => (
                                     <FriendSearchResult user={props.user} result={result} key={idx} setMessage={setMessage} setOpen={setOpen} setSeverity={setSeverity} addToMaybe={addToMaybe} checkMaybe={checkMaybe}/>
                                 ))}
                             </div>
-                            {maybe.length > 0  && (
-                                <div className={styles.maybe}>
-                                    {maybe.map((result, idx) => (
-                                        <MaybeRequest result={result} key={idx} idx={idx} removeMaybe={removeMaybe}/>
-                                    ))}
-                                    <button>Send Friend Request</button>
-                                </div>
-                            )}
-                                <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
-                                    <Alert onClose={handleClose} severity={severity}>
-                                        {message}
-                                    </Alert>
-                                </Snackbar>
-                        </div>
                     ) : 
-                        <div>
+                        <div className={styles.results}>
                             <h2>Sorry, we couldn't find anyone who matched</h2>
                         </div>}
                 </div>
             )
             }
+            {maybe.length > 0  && (
+                <div className={styles.maybe}>
+                    {maybe.map((result, idx) => (
+                        <MaybeRequest result={result} key={idx} idx={idx} removeMaybe={removeMaybe}/>
+                    ))}
+                    <button>Send Friend Request</button>
+                </div>
+            )}
+            </div>
+            <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={severity}>
+                    {message}
+                </Alert>
+            </Snackbar>
         </div>
     )
 }

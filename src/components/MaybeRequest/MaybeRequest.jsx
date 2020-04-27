@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styles from './MaybeRequest.module.css';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const MaybeRequest = props => {
 
@@ -11,8 +12,8 @@ const MaybeRequest = props => {
                 <h1>{props.result.name}</h1>
                 <span><LocationOnIcon />{props.result.location}</span>
             </div>
-            <div className={styles.addIcon}>
-                <button onClick={() => props.removeMaybe(props.idx)}>Remove</button>
+            <div>
+                < CancelIcon fontSize='large' onClick={() => props.removeMaybe(props.idx)} className={styles.removeIcon} />
             </div>
         </div>
     )
