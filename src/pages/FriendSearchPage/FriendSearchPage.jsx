@@ -32,6 +32,7 @@ const FriendSearchPage = props => {
     const [maybe, setMaybe] = useState([]);
 
     const addToMaybe = friend => {
+        if (checkMaybe(friend.id)) return;
         const newMaybe = [...maybe, friend];
         setMaybe(newMaybe);
     }
@@ -47,6 +48,10 @@ const FriendSearchPage = props => {
             setResults(res);
             setSearched(true);
         });
+    }
+
+    const checkMaybe = friend => {
+        return maybe.some(may => may.id === friend);
     }
 
     const classes = useStyles();
@@ -73,7 +78,7 @@ const FriendSearchPage = props => {
                         <div className={styles.container}>
                             <div className={styles.results}>
                                 {results.map((result, idx) => (
-                                    <FriendSearchResult user={props.user} result={result} key={idx} setMessage={setMessage} setOpen={setOpen} setSeverity={setSeverity} addToMaybe={addToMaybe}/>
+                                    <FriendSearchResult user={props.user} result={result} key={idx} setMessage={setMessage} setOpen={setOpen} setSeverity={setSeverity} addToMaybe={addToMaybe} checkMaybe={checkMaybe}/>
                                 ))}
                             </div>
                             {maybe.length > 0  && (

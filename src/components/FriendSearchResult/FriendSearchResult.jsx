@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import friendService from '../../utils/friendService';
 import styles from './FriendSearchResult.module.css';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -13,8 +13,6 @@ const FriendSearchResult = props => {
         });
     }
 
-    const [disabled, setDisabled] = useState(false);
-
     return (
         <div className={styles.container}>
             <img className={styles.imgIcon} src={require('./pikachu.png')} alt=""/>
@@ -25,9 +23,7 @@ const FriendSearchResult = props => {
             </div>
             <div className={styles.addIcon}>
                 <AddCircleOutlineIcon className={styles.btn} fontSize='large' onClick={() => {
-                        if (disabled) return;
                         props.addToMaybe(props.result);
-                        setDisabled(true);
                     }} />
             </div>
         </div>
