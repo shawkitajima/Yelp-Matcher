@@ -1,5 +1,7 @@
 .results {
     display: flex;
+    justify-content: space-evenly;
+    align-content: flex-start;
     flex-wrap: wrap;
     width: 70rem;
 }

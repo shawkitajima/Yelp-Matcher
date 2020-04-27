@@ -1,17 +1,9 @@
 import React from 'react';
-import friendService from '../../utils/friendService';
 import styles from './FriendSearchResult.module.css';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const FriendSearchResult = props => {
-    const request = () => {
-        friendService.request(props.user._id, props.result.id).then(res => {
-            props.setMessage(res.message);
-            props.setSeverity(res.severity);
-            props.setOpen(true);
-        });
-    }
 
     return (
         <div className={styles.container}>
