@@ -87,7 +87,7 @@ const FriendSearchPage = props => {
             <h1>Search Friends</h1>
             <div className={styles.search}>
                 <SearchIcon  color="disabled" className={styles.searchIcon} />
-                <input className={styles.searchInput} type="text" onChange={e => setSearch(e.target.value)} onKeyPress={e => searchFriends(e)}/>
+                <input placeholder='Search...' className={styles.searchInput} type="text" onChange={e => setSearch(e.target.value)} onKeyPress={e => searchFriends(e)}/>
             </div>
             <div className={styles.container}>
             {searched && (
@@ -110,7 +110,9 @@ const FriendSearchPage = props => {
                     {maybe.map((result, idx) => (
                         <MaybeRequest result={result} key={idx} idx={idx} removeMaybe={removeMaybe}/>
                     ))}
-                    <button onClick={() => sendRequests()}>Send Friend Requests</button>
+                    <div className={styles.requestButton} onClick={() => sendRequests()}>
+                        <div>Send Friend Request</div>
+                    </div>
                 </div>
             )}
             </div>

@@ -42,3 +42,24 @@
     left: 0.5rem;
     top: 0.25rem;
 }
+
+.requestButton {
+    display: flex;
+    height: 2.5rem;
+    font-weight: 600;
+    border: 2px solid black;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+}
+
+.requestButton>div {
+    font-size: 16px;
+}
+
+.requestButton:hover {
+    cursor: pointer;
+    background-color: gray;
+    color: white;
+}
