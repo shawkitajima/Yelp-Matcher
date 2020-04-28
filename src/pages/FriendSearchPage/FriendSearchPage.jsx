@@ -5,6 +5,7 @@ import styles from './FriendSearchPage.module.css';
 import FriendSearchResult from '../../components/FriendSearchResult/FriendSearchResult';
 import MaybeRequest from '../../components/MaybeRequest/MaybeRequest';
 
+import SearchIcon from '@material-ui/icons/Search';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -43,15 +44,31 @@ const FriendSearchPage = props => {
         setMaybe(newMaybe);
     }
 
-    const searchFriends = () => {
-        friendService.search(props.user._id, search).then(res => {
-            setResults(res);
-            setSearched(true);
-        });
+    const searchFriends = (e) => {
+        if (e.charCode == 13) {
+            friendService.search(props.user._id, search).then(res => {
+                setResults(res);
+                setSearched(true);
+            });
+        }
     }
 
     const checkMaybe = friend => {
         return maybe.some(may => may.id === friend);
+    }
+
+    const sendRequests = () => {
+        maybe.forEach(friend => {
+            setTimeout(() => {
+                friendService.request(props.user._id, friend.id).then(res => {
+                    console.log(res.message);
+                    setOpen(true);
+                    setSeverity(res.severity);
+                    setMessage(res.message);
+                });
+            }, 2000);
+        });
+        setMaybe([]);
     }
 
     const classes = useStyles();
@@ -67,14 +84,14 @@ const FriendSearchPage = props => {
 
     return (
         <div className={classes.root}>
-            <h1>Search for Some Friend!</h1>
-            <div>
-                <input type="text" onChange={e => setSearch(e.target.value)}/>
-                <button onClick={() => searchFriends()}>Search</button>
+            <h1>Search Friends</h1>
+            <div className={styles.search}>
+                <SearchIcon  color="disabled" className={styles.searchIcon} />
+                <input className={styles.searchInput} type="text" onChange={e => setSearch(e.target.value)} onKeyPress={e => searchFriends(e)}/>
             </div>
             <div className={styles.container}>
             {searched && (
-                <div>
+                <div className={styles.resultsContainer}>
                     {results.length ? (
                             <div className={styles.results}>
                                 {results.map((result, idx) => (
@@ -93,7 +110,7 @@ const FriendSearchPage = props => {
                     {maybe.map((result, idx) => (
                         <MaybeRequest result={result} key={idx} idx={idx} removeMaybe={removeMaybe}/>
                     ))}
-                    <button>Send Friend Request</button>
+                    <button onClick={() => sendRequests()}>Send Friend Requests</button>
                 </div>
             )}
             </div>

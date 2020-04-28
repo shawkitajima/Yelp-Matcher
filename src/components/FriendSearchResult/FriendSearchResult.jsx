@@ -14,7 +14,7 @@ const FriendSearchResult = props => {
                 <p>Like rate: {Math.round((props.result.rate + Number.EPSILON) * 100)}%</p>
             </div>
             <div className={styles.addIcon}>
-                <AddCircleOutlineIcon className={styles.btn} fontSize='large' onClick={() => {
+                <AddCircleOutlineIcon className={styles.btn} style={{ fontSize: 40 }} onClick={() => {
                         props.addToMaybe(props.result);
                     }} />
             </div>

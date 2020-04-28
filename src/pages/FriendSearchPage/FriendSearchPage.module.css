@@ -1,9 +1,14 @@
 .results {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-content: flex-start;
     flex-wrap: wrap;
-    width: 70rem;
+    width: 100%;
+}
+
+.resultsContainer {
+    width: 60%;
+    margin-right: 5rem;
 }
 
 .container {
@@ -15,4 +20,25 @@
     flex-direction: column;
     padding: 2rem;
     border: 2px solid black;
+}
+
+.searchInput {
+    width: 20rem;
+    border: 2px solid gray;
+    height: 2rem;
+    outline-width: 0;
+    font-size: 16px;
+    padding: 0px 20px;
+    padding-left: 2rem;
+}
+
+.search {
+    display: flex;
+    position: relative;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.25rem;
 }

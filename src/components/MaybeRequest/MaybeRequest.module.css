@@ -1,6 +1,5 @@
 .container {
     display: flex;
-    width: 25rem;
     padding: 1rem;
     border: 2px solid gray;
     margin-bottom: 2rem;
@@ -21,9 +20,10 @@
 
 .removeIcon {
     position: absolute;
-    right: -1.1rem;
-    top: -1.1rem;
-    z-index: 99;
+    right: -1.2rem;
+    top: -1.2rem;
+    border-radius: 50%;
+    background-color: white;
 }
 
 

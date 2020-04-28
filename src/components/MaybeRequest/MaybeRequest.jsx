@@ -13,7 +13,7 @@ const MaybeRequest = props => {
                 <span><LocationOnIcon />{props.result.location}</span>
             </div>
             <div>
-                < CancelIcon fontSize='large' onClick={() => props.removeMaybe(props.idx)} className={styles.removeIcon} />
+                < CancelIcon style={{ fontSize: 40 }} onClick={() => props.removeMaybe(props.idx)} className={styles.removeIcon} />
             </div>
         </div>
     )

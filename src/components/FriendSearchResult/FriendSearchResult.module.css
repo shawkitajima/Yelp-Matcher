@@ -1,10 +1,9 @@
 .container {
     display: flex;
-    width: 25rem;
+    width: 45%;
     height: 12rem;
     padding: 1rem;
     border: 2px solid gray;
-    margin-left: 1rem;
     margin-bottom: 2rem;
 }
 
@@ -17,6 +16,7 @@
 
 .details {
     margin-left: 1rem;
+    width: 25rem;
 }
 
 .addIcon {
