@@ -7,7 +7,7 @@
 }
 
 .resultsContainer {
-    width: 60%;
+    width: 70%;
     margin-right: 5rem;
 }
 
@@ -60,6 +60,5 @@
 
 .requestButton:hover {
     cursor: pointer;
-    background-color: gray;
-    color: white;
+    background-color: #F4F5F7;
 }
