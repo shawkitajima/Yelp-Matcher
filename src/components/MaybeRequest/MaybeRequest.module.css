@@ -1,3 +1,15 @@
+.flexHori {
+    display: flex;
+    justify-content: space-between;
+}
+
+.number {
+    color: gray;
+    font-size: 24px;
+    font-weight: 800;
+    padding-right: 2rem;
+}
+
 .container {
     display: flex;
     padding: 1rem;

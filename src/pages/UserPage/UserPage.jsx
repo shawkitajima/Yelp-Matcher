@@ -18,6 +18,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import SearchIcon from '@material-ui/icons/Search';
 
 import SwipePage from '../SwipePage/SwipePage'
 import LikePage from '../LikePage/LikePage';
@@ -154,11 +155,12 @@ const UserPage = props => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h4" noWrap>
-            <Link to='/' className={styles.logo}>yelp matcher</Link>
-          </Typography>
-          <div className={styles.search}>
-            <form onSubmit={e => handleSubmit(e)}>
+          <div className={styles.topMenu}>
+            <Typography variant="h4" noWrap>
+              <Link to='/' className={styles.logo}>yelp matcher</Link>
+            </Typography>
+            <form className={styles.search} onSubmit={e => handleSubmit(e)}>
+              <SearchIcon  color="disabled" className={styles.searchIcon} />
               <input className={styles.inputBar} type="search" placeholder='Search restaurants...' onChange={e => setSearch(e.target.value)}/>
             </form>
           </div>
