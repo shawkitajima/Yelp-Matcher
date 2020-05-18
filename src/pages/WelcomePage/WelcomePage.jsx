@@ -24,7 +24,7 @@ const WelcomePage = props => {
             <h2>Here Are Some Restaurants Around You!</h2>
             <div className={styles.secondSection}>
                 {restIds.map((rest, idx) => (
-                    <QuickOverview key={idx} id={rest} />
+                    <QuickOverview key={idx} id={rest} style={{width: '20%' }} />
                 ))}
             </div>
             <div className={styles.thirdSection}>

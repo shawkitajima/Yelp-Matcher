@@ -1,0 +1,98 @@
+.body {
+    padding: 0% 2%;
+    color: gray;
+}
+
+.backToFriends {
+    display: flex;
+    align-items: flex-start;
+    font-size: 20px;
+}
+
+.topContainer {
+    margin-top: 2%;
+    display: flex;
+    width: 100%;
+}
+
+.friendOverview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+    border: 2px solid gray;
+}
+
+.friendStats {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20%;
+    margin: 0 2%;   
+}
+
+.feature {
+    width: 30%;
+    display: flex;
+}
+
+.friendOverview > div:first-child {
+    align-self: flex-end;
+    padding-right: 1%;
+}
+
+.friendOverview > div:nth-child(3) {
+    font-size: 30px;
+    font-weight: 800;
+    color: black;
+    padding-top: 1%;
+}
+
+.friendOverview > div:nth-child(4) {
+    display: flex;
+    font-size: 14px;
+    padding: 2%;
+}
+
+.friendOverview > div:nth-child(4)  div {
+    margin-top: -2px;
+    padding-left: 0.5px;
+}
+
+.friendOverview > div:nth-child(5) {
+    width: 80%;
+    text-align: center;
+}
+
+.icon {
+    max-width: 20%;
+    height: auto;
+}
+
+
+
+.statBox {
+    display: flex;
+    padding: 10% 5%;
+    border: 2px solid gray;
+}
+
+.statBox > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 5%;
+    width: 60%
+}
+
+.statBox > div > div:first-child {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.bookmark {
+    margin-left: -20%;
+    z-index: 100;
+    margin-top: -2%;
+    width: 0%;
+}
