@@ -96,3 +96,39 @@
     margin-top: -2%;
     width: 0%;
 }
+
+.middleContainer {
+    display: flex;
+    width: 100%;
+    padding: 2% 10%;
+    justify-content: space-evenly;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.middleContainer > div:hover {
+    cursor: pointer;
+}
+
+.bottomContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%
+}
+
+.quick {
+    width: 25%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 5%;
+}
+
+.underline {
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: -1%;
+    text-align: center;
+    width: 85%;
+    border: 2px solid gray;
+    border-radius: 5px;
+}

@@ -116,8 +116,8 @@ const RestaurantDetailPage = props => {
                             ))}
                         </p>
                         {/* HEYY */}
-                        {detail.is_closed ? (<p>Closed</p>) : (<p>Open Until {utilities.formatTime(detail.hours[0].open[today].end)}</p>)}
-                        {/* {detail.is_closed ? (<p style={{color: 'red'}}>Closed</p>) : (<p style={{color: 'green'}}>Open Now!</p>)} */}
+                        {/* {detail.is_closed ? (<p>Closed</p>) : (<p>Open Until {utilities.formatTime(detail.hours[0].open[today].end)}</p>)} */}
+                        {detail.is_closed ? (<p style={{color: 'red'}}>Closed</p>) : (<p style={{color: 'green'}}>Open Now!</p>)}
                         <div className={styles.iconParent}>
                             <AddCircleIcon style={{ color: 'green', fontSize: 40 }} onClick={() => {
                                 like(props.id)
@@ -154,9 +154,9 @@ const RestaurantDetailPage = props => {
                     <div>
                         <h2>Hours</h2>
                         {/* HEYY */}
-                        {detail.hours[0].open.map((obj, idx) => (
+                        {/* {detail.hours[0].open.map((obj, idx) => (
                             <p key={idx}>{weekdays[obj.day]} &nbsp; {utilities.formatTime(obj.start)} - {utilities.formatTime(obj.end)}</p>
-                        ))}
+                        ))} */}
                     </div>
                     <div>
                         <h2>Recommended Reviews</h2>

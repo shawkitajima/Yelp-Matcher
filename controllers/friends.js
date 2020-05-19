@@ -9,7 +9,7 @@ module.exports = {
   rejectRequest,
   getFriends,
   deleteFriend,
-  getMatches,
+  getDetails,
   shareRest,
 };
 
@@ -134,12 +134,17 @@ function deleteFriend(req, res) {
   });
 }
 
-function getMatches(req, res) {
+function getDetails(req, res) {
   if (req.params.friend == 0) return res.send([]);
   User.findById(req.params.id, function(err, user) {
     User.findById(req.params.friend, function(err, friend) {
       let matches = user.likes.filter(like => friend.likes.includes(like));
-      res.send(matches);
+      let mutualFriends = user.friends.filter(fren => friend.friends.includes(fren));
+      let friendCount = mutualFriends.length;
+      let likes = friend.likes;
+      let name = friend.name;
+      let location = friend.location
+      res.send({matches, friendCount, likes, name, location});
     });
   });
 }

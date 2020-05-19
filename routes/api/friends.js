@@ -8,7 +8,7 @@ router.post('/request', friendsCtrl.friendRequest);
 router.post('/accept', friendsCtrl.acceptRequest);
 router.delete('/pending', friendsCtrl.rejectRequest);
 router.delete('/friend', friendsCtrl.deleteFriend);
-router.get('/matches/:id/:friend', friendsCtrl.getMatches);
+router.get('/details/:id/:friend', friendsCtrl.getDetails);
 router.post('/share', friendsCtrl.shareRest);
 router.get('/:id', friendsCtrl.getFriends);
 

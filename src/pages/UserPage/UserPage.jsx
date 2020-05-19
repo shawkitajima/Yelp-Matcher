@@ -189,25 +189,6 @@ const UserPage = props => {
             <ListItem button component={Link} to="/likes">
               <ListItemText primary='Likes' />
             </ListItem>
-            {!showFriends ? (
-              <ListItem button onClick={() => setShowFriends(!showFriends)}>
-                <ListItemText primary='Matches >' />
-              </ListItem>
-            ) : (
-              <>
-              <ListItem button onClick={() => setShowFriends(!showFriends)}>
-                <ListItemText primary='Matches v' />
-              </ListItem>
-              <Divider />
-              {friends.map((friend, idx) => (
-                <ListItem key={idx} button component={Link} to={`/matches/${props.user._id}/${friend._id}/${friend.name}`}>
-                  <ListItemText primary={friend.name} />
-                </ListItem>
-              ))}
-              <Divider />
-             </> 
-            )
-            }
             <ListItem button component={Link} to="/friends">
               <ListItemText primary='Friends' />
             </ListItem>
@@ -246,10 +227,6 @@ const UserPage = props => {
                   <LikePage user={props.user} />
               )
               }/>
-              <Route exact path='/matches/:id/:friend/:name' render={({history}) => (
-                  < MatchPage user={props.user} />
-              )
-              }/>
               <Route exact path='/friends' render={({history}) => (
                   <FriendPage user={props.user} />
               )
@@ -274,8 +251,8 @@ const UserPage = props => {
                 <NonSwipeDetailPage user={props.user} />
               )
               }/>
-              <Route exact path='/friendDetails' render={() => (
-                <FriendDetailPage />
+              <Route exact path='/friendDetails' render={({history}) => (
+                <FriendDetailPage user={props.user} />
               )
               }/>
               <Route exact path='/rejections' render={({history}) => (

@@ -7,7 +7,7 @@ export default {
     rejectRequest,
     getFriends,
     deleteFriend,
-    getMatches,
+    getDetails,
     share,
   };
 
@@ -55,8 +55,8 @@ function deleteFriend(id, friend) {
   .then(res => res.json()); 
 }
 
-function getMatches(id, friend) {
-  return fetch(BASE_URL + 'matches/' + id + '/' + friend).then(res => res.json());
+function getDetails(id, friend) {
+  return fetch(BASE_URL + 'details/' + id + '/' + friend).then(res => res.json());
 }
 
 function share(friend, name, rest, restId) {

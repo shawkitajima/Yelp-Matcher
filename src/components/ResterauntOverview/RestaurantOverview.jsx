@@ -50,8 +50,8 @@ const RestaurantOverview = props => {
                                 ))}
                             </p>
                             {/* HEYY */}
-                            {detail.is_closed ? (<p>Currently Closed</p>) : (<p>Open Until {utilities.formatTime(detail.hours[0].open[today].end)}</p>)}
-                            {/* {detail.is_closed ? (<p>Currently Closed</p>) : (<p>Open Now!</p>)} */}
+                            {/* {detail.is_closed ? (<p>Currently Closed</p>) : (<p>Open Until {utilities.formatTime(detail.hours[0].open[today].end)}</p>)} */}
+                            {detail.is_closed ? (<p>Currently Closed</p>) : (<p>Open Now!</p>)}
                         </div>
                         <div className={styles.location}>
                             <p>{detail.location.address1}, {detail.location.city} {detail.location.zip_code}</p>
