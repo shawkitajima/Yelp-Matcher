@@ -9,3 +9,7 @@ p {
     font-size: 125%;
 }
 
+.Link {
+    text-decoration: none;
+    color: inherit;
+}

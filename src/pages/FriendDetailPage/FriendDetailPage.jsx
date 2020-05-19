@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {useParams, Link} from 'react-router-dom';
 import friendService from '../../utils/friendService';
 import styles from './FriendDetailPage.module.css';
 import QuickOverview from '../../components/QuickOverview/QuickOverview';
@@ -15,12 +16,13 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 
 const FriendDetailPage = props => {
 
+    const { id } = useParams();
     const [details, setDetails] = useState({});
     const [loading, setLoading] = useState(true);
     const [recent, setRecent] = useState(true);
 
     useEffect(() => {
-        friendService.getDetails(props.user._id, "5e8cd46769aabeb34efcd34d").then(res => {
+        friendService.getDetails(props.user._id, id).then(res => {
             setDetails(res);
             setLoading(false);
         });
@@ -30,10 +32,10 @@ const FriendDetailPage = props => {
         <>
         { loading ? (<LinearProgress />) : (
             <div className={styles.body}>
-                <div className={styles.backToFriends}>
+                <Link className={styles.link} to={'/friends'}><div className={styles.backToFriends}>
                     <ArrowBackIcon />
                     <div>&nbsp; My Friends</div>
-                </div>
+                </div></Link>
                 <div className={styles.topContainer}>
                     <div className={styles.friendOverview}>
                         <div><MoreHorizIcon style={{ fontSize: 40 }}/></div>

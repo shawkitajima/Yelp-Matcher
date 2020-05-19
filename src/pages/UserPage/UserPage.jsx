@@ -114,9 +114,6 @@ const UserPage = props => {
   const [notifications, setNotifications] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [search, setSearch] = useState('');
-
-  const [friends, setFriends] = useState([]);
-  const [showFriends, setShowFriends] = useState(false);
   
   const getNotifications = () => {
     userService.getNotifications(props.user._id).then(res => {
@@ -128,7 +125,6 @@ const UserPage = props => {
 
   useEffect(() => {
     getNotifications();
-    friendService.getFriends(props.user._id).then(res => setFriends(res));
   }, [props.user,])
 
   const handleSubmit = e => {
@@ -204,9 +200,6 @@ const UserPage = props => {
             <ListItem button component={Link} to="/rejections">
               <ListItemText primary='Rejections' />
             </ListItem>
-            <ListItem button component={Link} to="/friendDetails">
-              <ListItemText primary='Details' />
-            </ListItem>
             <ListItem button onClick={() => props.handleLogout()}>
               <ListItemText primary='Logout' />
             </ListItem>
@@ -251,7 +244,7 @@ const UserPage = props => {
                 <NonSwipeDetailPage user={props.user} />
               )
               }/>
-              <Route exact path='/friendDetails' render={({history}) => (
+              <Route exact path='/friendDetails/:id' render={({history}) => (
                 <FriendDetailPage user={props.user} />
               )
               }/>

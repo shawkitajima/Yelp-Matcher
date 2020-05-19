@@ -6,7 +6,7 @@ import QuickOverview from '../../components/QuickOverview/QuickOverview';
 
 const WelcomePage = props => {
 
-    const restIds = ['J7_y8fSiuqhf9m7oiixZLw', 'KfkPjSTu0OV7yIPTZ4qi3w', '6t0C9lUr3g-hY6oQba4f0w', 'HFwEjoh7L0Lu3Ps7ypkqVg', 'r-59c9YgjqShVvQVI-AGEQ'];
+    const restIds = ['J7_y8fSiuqhf9m7oiixZLw', 'KfkPjSTu0OV7yIPTZ4qi3w', '6t0C9lUr3g-hY6oQba4f0w', 'r-59c9YgjqShVvQVI-AGEQ'];
 
     return (
         <div className={styles.container}>
@@ -24,7 +24,9 @@ const WelcomePage = props => {
             <h2>Here Are Some Restaurants Around You!</h2>
             <div className={styles.secondSection}>
                 {restIds.map((rest, idx) => (
-                    <QuickOverview key={idx} id={rest} style={{width: '20%' }} />
+                    <div key={idx}>
+                        <QuickOverview id={rest} style={{width: '20%' }} />
+                    </div>
                 ))}
             </div>
             <div className={styles.thirdSection}>

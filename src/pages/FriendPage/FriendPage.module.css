@@ -1,0 +1,72 @@
+.body {
+    padding: 0% 2%;
+    color: gray;
+}
+
+.topContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 14px;
+    height: 2rem;
+    margin-bottom: 2%;
+}
+
+.topLeft {
+    display: flex;
+    width: 50%;
+}
+
+.topLeft > div:nth-child(2) {
+    margin-left: 2%;
+    border: 2px solid gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 15%;
+    padding: 0 1%;
+}
+
+.topRight {
+    display: flex;
+    align-self: flex-end;
+}
+
+.topRight > div {
+    border: 2px solid gray;
+    text-align: center;
+    width: 10rem;
+}
+
+
+.friendList {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.friendList > div {
+    width: 22%;
+}
+
+
+.search {
+    display: flex;
+    position: relative;
+    width: 60%;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 2%;
+    top: 12%;
+}
+
+.searchInput {
+    border: 2px solid gray;
+    width: 100%;
+    outline-width: 0;
+    padding-left: 8%;
+    font-size: 14px;
+}
