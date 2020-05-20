@@ -87,7 +87,7 @@ function acceptRequest(req, res) {
       if (err) console.log(err);
       User.findById(req.body.friend, function(err, friend) {
         let friendFriends = [...friend.friends, req.body.id];
-        let friendNotifications = [...friend.notifications, `${user.name} accepted your friend request!`];
+        let friendNotifications = [...friend.notifications, {name: user.name, id: user._id}];
         User.findByIdAndUpdate(req.body.friend, {friends: friendFriends, notifications: friendNotifications}, function(err, newFriend) {
           res.send({
             message: `${friend.name} has been added as a friend`,

@@ -1,6 +1,7 @@
 .container {
     display: flex;
     justify-content: space-between;
+    height: auto;
 }
 
 .container > div:nth-child(2) {
@@ -15,4 +16,9 @@
 
 .button:hover {
     cursor: pointer;
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
 }

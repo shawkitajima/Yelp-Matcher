@@ -36,6 +36,8 @@ import NonSwipeDetailPage from '../NonSwipeDetailPage/NonSwipeDetailPage';
 import RejectionsPage from '../RejectionsPage/RejectionsPage';
 import FriendDetailPage from '../FriendDetailPage/FriendDetailPage';
 import FriendRequestMenuItem from '../../components/FriendRequestMenuItem/FriendRequestMenuItem'
+import RecommendationMenuItem from '../../components/RecommendationMenuItem/RecommendationMenuItem'
+import NotificationMenuItem from '../../components/NotificationMenuItem/NotificationMenuItem'
 
 import styles from './UserPage.module.css';
 
@@ -194,7 +196,13 @@ const UserPage = props => {
                         onClose={handleClose}
                     >
                   {pending.map((friend, idx) => (
-                    <FriendRequestMenuItem handleClose={handleClose} getNotifications={getNotifications} friend={friend} key={idx} user={props.user} />
+                    <FriendRequestMenuItem getNotifications={getNotifications} friend={friend} key={idx} user={props.user} />
+                  ))}
+                  {recommendations.map((rec, idx) => (
+                    <RecommendationMenuItem  getNotifications={getNotifications} rec={rec} key={idx} idx={idx} user={props.user} />
+                  ))}
+                  {notifications.map((notif, idx) => (
+                    <NotificationMenuItem  getNotifications={getNotifications} notif={notif} key={idx} idx={idx} user={props.user} />
                   ))}
                   </Menu>
                   </>
@@ -246,9 +254,6 @@ const UserPage = props => {
             <ListItem button component={Link} to="/friends">
               <ListItemText primary='Friends' />
             </ListItem>
-            <ListItem button component={Link} to="/notifications">
-              <ListItemText primary='Notifications' />
-            </ListItem>
             <ListItem button component={Link} to="/topLikes">
               <ListItemText primary='Top Likes' />
             </ListItem>
@@ -281,10 +286,6 @@ const UserPage = props => {
               }/>
               <Route exact path='/friendSearch' render={({history}) => (
                   <FriendSearchPage user={props.user} />
-              )
-              }/>
-              <Route exact path='/notifications' render={({history}) => (
-                <NotificationsPage user={props.user} pending={pending} notifications={notifications} recommendations={recommendations} getNotifications={getNotifications} />
               )
               }/>
               <Route exact path='/topLikes' render={({history}) => (
