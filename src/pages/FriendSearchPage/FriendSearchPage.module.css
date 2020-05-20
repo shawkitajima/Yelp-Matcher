@@ -6,6 +6,27 @@
     width: 100%;
 }
 
+.body {
+    padding: 0% 2%;
+    color: gray;
+}
+
+.topContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.topRight {
+    display: flex;
+    align-self: flex-end;
+}
+
+.topRight > div {
+    border: 2px solid gray;
+    text-align: center;
+    width: 10rem;
+}
+
 .resultsContainer {
     width: 70%;
     margin-right: 5rem;
@@ -61,4 +82,22 @@
 .requestButton:hover {
     cursor: pointer;
     background-color: #F4F5F7;
+}
+
+.topRight>div:nth-child(2) {
+    color: white;
+    background-color: #938B8B;
+}
+
+.topRight>div:nth-child(2):hover {
+    cursor: not-allowed
+}
+
+.topRight>div:nth-child(1):hover {
+    cursor: pointer;
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
 }

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import friendService from '../../utils/friendService';
 import styles from './FriendPage.module.css';
 
@@ -35,7 +36,7 @@ const FriendPage = props => {
                 </div>
                 <div className={styles.topRight}>
                     <div>My Friends</div>
-                    <div>Search Friends</div>
+                    <div><Link className={styles.link} to={'/friendSearch'}>Search Friends</Link></div>
                 </div>
             </div>
             <h2>{friends.length} Friends</h2>

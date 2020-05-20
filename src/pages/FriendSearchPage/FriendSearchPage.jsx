@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import friendService from '../../utils/friendService';
 import styles from './FriendSearchPage.module.css';
 
@@ -17,6 +18,8 @@ function Alert(props) {
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
+      color: 'gray',
+      padding: '0 2%',
       '& > * + *': {
         marginTop: theme.spacing(2),
       },
@@ -83,11 +86,17 @@ const FriendSearchPage = props => {
     };
 
     return (
-        <div className={classes.root}>
+    <div className={classes.root}>
             <h1>Search Friends</h1>
-            <div className={styles.search}>
-                <SearchIcon  color="disabled" className={styles.searchIcon} />
-                <input placeholder='Search...' className={styles.searchInput} type="text" onChange={e => setSearch(e.target.value)} onKeyPress={e => searchFriends(e)}/>
+            <div className={styles.topContainer}>
+                <div className={styles.search}>
+                    <SearchIcon  color="disabled" className={styles.searchIcon} />
+                    <input placeholder='Search...' className={styles.searchInput} type="text" onChange={e => setSearch(e.target.value)} onKeyPress={e => searchFriends(e)}/>
+                </div>
+                <div className={styles.topRight}>
+                    <div><Link className={styles.link} to={'/friends'}>My Friends</Link></div>
+                    <div>Search Friends</div>
+                </div>
             </div>
             <div className={styles.container}>
             {searched && (

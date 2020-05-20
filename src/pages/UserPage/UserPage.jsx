@@ -188,9 +188,6 @@ const UserPage = props => {
             <ListItem button component={Link} to="/friends">
               <ListItemText primary='Friends' />
             </ListItem>
-            <ListItem button component={Link} to="/friendSearch">
-              <ListItemText primary='Search Friends' />
-            </ListItem>
             <ListItem button component={Link} to="/notifications">
               <ListItemText primary='Notifications' />
             </ListItem>
