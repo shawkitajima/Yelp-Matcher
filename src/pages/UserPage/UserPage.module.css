@@ -25,6 +25,19 @@
     width: 100%;
 }
 
+.topMenu > div {
+    display: flex;
+}
+
+.topMenu > div > div {
+    margin: 0 2%;
+    margin-top: 0.5%;
+} 
+
+.topMenu > div > div:hover {
+    cursor: pointer;
+}
+
 .search {
     display: flex;
     position: relative;

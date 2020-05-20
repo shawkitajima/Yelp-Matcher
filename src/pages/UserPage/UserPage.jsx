@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Route, Switch, Link, useHistory } from 'react-router-dom';
 import userService from '../../utils/userService';
-import friendService from '../../utils/friendService';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme, StylesProvider } from '@material-ui/core/styles';
@@ -19,6 +18,11 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import SearchIcon from '@material-ui/icons/Search';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+
 
 import SwipePage from '../SwipePage/SwipePage'
 import LikePage from '../LikePage/LikePage';
@@ -31,6 +35,7 @@ import SearchResultsPage from '../SearchResultsPage/SearchResultsPage';
 import NonSwipeDetailPage from '../NonSwipeDetailPage/NonSwipeDetailPage';
 import RejectionsPage from '../RejectionsPage/RejectionsPage';
 import FriendDetailPage from '../FriendDetailPage/FriendDetailPage';
+import FriendRequestMenuItem from '../../components/FriendRequestMenuItem/FriendRequestMenuItem'
 
 import styles from './UserPage.module.css';
 
@@ -97,10 +102,24 @@ const useStyles = makeStyles((theme) => ({
 
 
 const UserPage = props => {
+
   const history = useHistory();
+
+  //MaterialUI side Menu logic
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  //MaterialUI Vertical menu logic
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleDrawerOpen = () => {
   setOpen(true);
@@ -110,6 +129,8 @@ const UserPage = props => {
     setOpen(false);
   };
 
+
+  // Our logic
   const [pending, setPending] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
@@ -156,10 +177,47 @@ const UserPage = props => {
             <Typography variant="h4" noWrap>
               <Link to='/' className={styles.logo}>yelp matcher</Link>
             </Typography>
-            <form className={styles.search} onSubmit={e => handleSubmit(e)}>
-              <SearchIcon  color="disabled" className={styles.searchIcon} />
-              <input className={styles.inputBar} type="search" placeholder='Search restaurants...' onChange={e => setSearch(e.target.value)}/>
-            </form>
+            <div>
+              <form className={styles.search} onSubmit={e => handleSubmit(e)}>
+                <SearchIcon  color="disabled" className={styles.searchIcon} />
+                <input className={styles.inputBar} type="search" placeholder='Search restaurants...' onChange={e => setSearch(e.target.value)}/>
+              </form>
+              <div>
+                {pending.length + notifications.length + recommendations.length ? (
+                  <>
+                  <NotificationsActiveIcon style={{fontSize: 40}} onClick={handleClick}/>
+                  <Menu
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                    >
+                  {pending.map((friend, idx) => (
+                    <FriendRequestMenuItem handleClose={handleClose} getNotifications={getNotifications} friend={friend} key={idx} user={props.user} />
+                  ))}
+                  </Menu>
+                  </>
+                ): (
+                <>
+                <NotificationsNoneIcon style={{fontSize: 40}} onClick={handleClick}/>
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+              >
+                  <MenuItem onClick={() => {
+                      handleClose();
+                  }}>
+                      Sorry, You have no notifications
+                  </MenuItem>
+                </Menu>
+                </>
+                )}
+              </div>
+            </div>
           </div>
         </Toolbar>
       </AppBar>
