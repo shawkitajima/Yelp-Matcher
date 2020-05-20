@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import restaurantService from '../../utils/restaurantService';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import utilities from '../../utils/utilities';
@@ -35,7 +36,11 @@ const QuickOverview = props => {
                     <img onClick={() => incrementImage()} className={styles.containerImg} src={detail.photos[imageIdx]} alt="sorry"/>
                     <div className={styles.details}>
                         <div>
-                            <h2>{detail.name}</h2>
+                            {props.user ? (
+                                <Link className={styles.link} to={`/detail/${detail.id}`}><h2>{detail.name}</h2></Link>
+                            ) : (
+                                <h2>{detail.name}</h2>
+                            )}
                             <div className={styles.ratings}>
                                 <img className={styles.starImg} src={require(`../../pages/RestaurantDetailPage/large_${detail.rating}.png`)} alt="sorry"/>
                                 <span> &nbsp; {detail.review_count} Reviews</span>

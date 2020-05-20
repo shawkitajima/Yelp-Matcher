@@ -10,7 +10,7 @@ const RecommendationMenuItem = props => {
         <MenuItem className={styles.container} style={{width: '30rem'}}>
             <div>{props.rec.name} recommended {props.rec.rest}</div>
             <div>
-                <div className={styles.button}><Link to={`/detail/${props.rec.restId}`}>View</Link></div>
+                <div className={styles.button}><Link className={styles.link} to={`/detail/${props.rec.restId}`}>View</Link></div>
                 <div onClick={() => userService.deleteRecommendation(props.user._id, props.idx).then(res => props.getNotifications())} className={styles.button}>Delete</div>
             </div>
         </MenuItem>        

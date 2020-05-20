@@ -7,6 +7,7 @@ module.exports = {
     reviews,
     topLikes,
     searchRest,
+    filterSearch,
 }
 
 function restaurants(req, res) {
@@ -114,6 +115,27 @@ function searchRest(req, res) {
     };
     const options = {
         url: `https://api.yelp.com/v3/businesses/search?term=${req.params.search}&latitude=${req.params.lat}&longitude=${req.params.long}&limit=5&categories=food`,
+        headers: headers
+    };
+    function callback(error, response, body) {
+        if (error) console.log(error);
+        if (!error && response.statusCode == 200) {
+            let parsed = JSON.parse(body);
+            let results = parsed.businesses;
+            res.send(results);
+        }
+    }
+    request(options, callback);
+}
+
+function filterSearch(req, res) {
+    const headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + process.env.YELP_KEY 
+    };
+    const options = {
+        url: `https://api.yelp.com/v3/businesses/search?term=restaurants&latitude=${req.body.lat}&longitude=${req.body.long}&limit=5&categories=${req.body.category}`,
         headers: headers
     };
     function callback(error, response, body) {

@@ -94,7 +94,7 @@ const FriendDetailPage = props => {
                         <div className={styles.bottomContainer}>
                             {details.likes.map((like, idx) => (
                                 <div key={idx} className={styles.quick}>
-                                    <QuickOverview id={like} />
+                                    <QuickOverview id={like} user={props.user} />
                                 </div>
                             ))}
                         </div>
@@ -102,7 +102,7 @@ const FriendDetailPage = props => {
                         <div className={styles.bottomContainer}>
                             {details.matches.map((match, idx) => (
                                 <div key={idx} className={styles.quick}>
-                                    <QuickOverview id={match} />
+                                    <QuickOverview id={match} user={props.user} />
                                 </div>
                             ))}
                         </div>

@@ -5,7 +5,8 @@ export default {
     detail,
     reviews,
     topLikes,
-    search
+    search,
+    filter
 };
 
 
@@ -27,4 +28,12 @@ function topLikes() {
 
 function search(search, lat, long) {
     return fetch(`${BASE_URL}/search/${search}/${lat}/${long}`).then(res => res.json());
+}
+
+function filter(lat, long, category) {
+    return fetch(`${BASE_URL}/filter`, {
+        method: 'POST',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify({lat, long, category})
+    }).then(res => res.json());
 }

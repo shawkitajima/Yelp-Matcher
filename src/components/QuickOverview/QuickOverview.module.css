@@ -35,3 +35,12 @@
 .details > div {
     padding-left: 0.5rem;
 }
+
+.link {
+    text-decoration: none;
+    color: inherit
+}
+
+.link:hover {
+    cursor: pointer;
+}

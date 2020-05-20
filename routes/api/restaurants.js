@@ -8,5 +8,6 @@ router.get('/reviews/:id', restaurantsCtrl.reviews);
 router.get('/top', restaurantsCtrl.topLikes);
 router.get('/search/:search/:lat/:long', restaurantsCtrl.searchRest)
 router.get('/:id/:lat/:long/:offset', restaurantsCtrl.restaurants);
+router.post('/filter', restaurantsCtrl.filterSearch);
 
 module.exports = router;
