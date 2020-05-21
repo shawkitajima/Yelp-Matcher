@@ -24,12 +24,11 @@ import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 
 
+import HomePage from '../HomePage/HomePage';
 import SwipePage from '../SwipePage/SwipePage'
 import LikePage from '../LikePage/LikePage';
-import FriendSearchPage from '../FriendSearchPage/FriendSearchPage';
-import NotificationsPage from '../NotificationsPage/NotificationsPage';
 import FriendPage from '../FriendPage/FriendPage';
-import MatchPage from '../MatchPage/MatchPage';
+import FriendSearchPage from '../FriendSearchPage/FriendSearchPage';
 import TopLikesPage from '../TopLikesPage/TopLikesPage';
 import SearchResultsPage from '../SearchResultsPage/SearchResultsPage';
 import NonSwipeDetailPage from '../NonSwipeDetailPage/NonSwipeDetailPage';
@@ -246,6 +245,9 @@ const UserPage = props => {
         <Divider />
         <List >
             <ListItem button component={Link} to="/">
+              <ListItemText primary='Home' />
+            </ListItem>
+            <ListItem button component={Link} to="/swipe">
               <ListItemText primary='Swipe' />
             </ListItem>
             <ListItem button component={Link} to="/likes">
@@ -273,6 +275,10 @@ const UserPage = props => {
       <div className={classes.drawerHeader} />
           <Switch>
               <Route exact path='/' render={() => (
+                  <HomePage user={props.user}/>
+              )
+              }/>
+              <Route exact path='/swipe' render={() => (
                   <SwipePage user={props.user}/>
               )
               }/>

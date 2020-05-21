@@ -135,7 +135,7 @@ function filterSearch(req, res) {
         'Authorization': 'Bearer ' + process.env.YELP_KEY 
     };
     const options = {
-        url: `https://api.yelp.com/v3/businesses/search?term=restaurants&latitude=${req.body.lat}&longitude=${req.body.long}&limit=5&categories=${req.body.category}`,
+        url: `https://api.yelp.com/v3/businesses/search?term=restaurants&latitude=${req.body.lat}&longitude=${req.body.long}&limit=50&categories=${req.body.category}`,
         headers: headers
     };
     function callback(error, response, body) {

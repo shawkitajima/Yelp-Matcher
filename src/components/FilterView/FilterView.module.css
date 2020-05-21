@@ -1,0 +1,43 @@
+.body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.selection {
+    padding: 0 15%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+}
+
+.selection > div:hover {
+    cursor: pointer
+}
+
+.selection > div {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.underline {
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: -1%;
+    text-align: center;
+    width: 85%;
+    border: 2px solid gray;
+    border-radius: 5px;
+}
+
+.overviews {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.overviews > div {
+    width: 20.5%;
+    margin-bottom: 5%;
+}
