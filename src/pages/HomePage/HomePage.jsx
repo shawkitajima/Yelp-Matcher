@@ -17,8 +17,8 @@ const HomePage = props => {
                         We are so lucky to have you here with us. We
                         hope you have fun swiping and matching and 
                         making plans with us. But please avoid visiting
-                        restaurants with you friends until we clear the 
-                        current Coronavirus situation!
+                        restaurants with your friends until we clear the 
+                        current Coronavirus situation! This is a team effort!
                     </div>
                 </div>
                 <div>
