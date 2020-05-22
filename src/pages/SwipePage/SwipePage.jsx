@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { usePosition} from 'use-position';
+import {useParams} from 'react-router-dom';
 import restaurantService from '../../utils/restaurantService';
 import userService from '../../utils/userService';
 import friendService from '../../utils/friendService';
@@ -8,6 +9,8 @@ import RestaurantDetailPage from '../RestaurantDetailPage/RestaurantDetailPage'
 const SwipePage = props => {
 
     const { latitude, longitude } = usePosition();
+
+    const { location } = useParams();
 
     const [rests, setRests] = useState([{}]);
 
@@ -33,11 +36,24 @@ const SwipePage = props => {
         moveNext()
     }
 
+
+    // We will allow users to use their browser based location OR
+    // They can swipe using a location they inputted in the home page
+    const getRests = () => {
+        if (location === '0') {
+            restaurantService.restaurants(latitude, longitude, props.user._id).then(res => {
+                setRests(res);
+                userService.setLocation(props.user._id, res[0].location.city);
+            });
+        } else {
+            restaurantService.restaurants(latitude, longitude, props.user._id, location).then(res => {
+                setRests(res);
+            })
+        }
+    }
+
     useEffect(() => {
-        restaurantService.restaurants(latitude, longitude, props.user._id).then(res => {
-            setRests(res);
-            userService.setLocation(props.user._id, res[0].location.city);
-        });
+        getRests();
         friendService.getFriends(props.user._id).then(res => setFriends(res));
     }, [latitude, longitude, offset, props.user._id])
     

@@ -247,7 +247,7 @@ const UserPage = props => {
             <ListItem button component={Link} to="/">
               <ListItemText primary='Home' />
             </ListItem>
-            <ListItem button component={Link} to="/swipe">
+            <ListItem button component={Link} to="/swipe/0">
               <ListItemText primary='Swipe' />
             </ListItem>
             <ListItem button component={Link} to="/likes">
@@ -278,7 +278,7 @@ const UserPage = props => {
                   <HomePage user={props.user}/>
               )
               }/>
-              <Route exact path='/swipe' render={() => (
+              <Route exact path='/swipe/:location' render={() => (
                   <SwipePage user={props.user}/>
               )
               }/>

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import styles from './HomePage.module.css';
 import FilterView from '../../components/FilterView/FilterView'
 
@@ -6,6 +7,9 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const HomePage = props => {
+
+    const [location, setLocation] = useState(0);
+
     return (
         <div className={styles.body}>
             <div className={styles.topSection}>
@@ -27,10 +31,10 @@ const HomePage = props => {
                         <div>
                             <LocationOnIcon style={{fontSize: 30}} />
                         </div>
-                        <input type="text" placeholder={props.user.location}/>
+                        <input type="text" placeholder={props.user.location} onChange={e => setLocation(e.target.value)}/>
                     </div>
                     <div className={styles.button}>
-                        <div>Explore Food</div>
+                        <Link className={styles.link} to={`/swipe/${location}`}><div>Explore Food</div></Link>
                     </div>
                 </div>
             </div>

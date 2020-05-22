@@ -12,13 +12,18 @@ module.exports = {
 
 function restaurants(req, res) {
     User.findById(req.params.id, function(err, user) {
+        console.log(req.params.location);
+        let url = `https://api.yelp.com/v3/businesses/search?term=restaurants&latitude=${req.params.lat}&longitude=${req.params.long}&open_now=true&limit=50&offset=${req.params.offset}`;
+        if (req.params.location !== 'undefined') {
+            url = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${req.params.location}&open_now=true&limit=50&offset=${req.params.offset}`;
+        }
         const headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + process.env.YELP_KEY 
         };
         const options = {
-            url: `https://api.yelp.com/v3/businesses/search?term=restaurants&latitude=${req.params.lat}&longitude=${req.params.long}&open_now=true&limit=50&offset=${req.params.offset}`,
+            url,
             headers: headers
         };
         function callback(error, response, body) {

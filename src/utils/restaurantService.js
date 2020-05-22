@@ -10,8 +10,8 @@ export default {
 };
 
 
-function restaurants(lat, long, id) {
-    return fetch(`${BASE_URL}/${id}/${lat}/${long}/0`).then(res => res.json());
+function restaurants(lat, long, id, location) {
+    return fetch(`${BASE_URL}/${id}/${lat}/${long}/0/${location}`).then(res => res.json());
 }
 
 function detail(id) {
