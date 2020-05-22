@@ -11,7 +11,9 @@ const FilterView = props => {
     const { latitude, longitude } = usePosition();
     // This array will store all of the restaurants to be displayed.
     const [rests, setRests] = useState([]);
-
+    
+    // Let's define the categories here so that we don't have to hard code them in the html
+    // We will also use this array to get the filtered restaurants
     // We need to be able to underline restaurants if they are selected
     // We also need to remove underlines from restaurants if they are not selected
     // To do this, we are going to create a default nonunderlined array of objects, which has a "visible" property that will be false;
@@ -21,9 +23,6 @@ const FilterView = props => {
         {category: 'italian', visible: false}, {category: 'japanese', visible: false},{category: 'mexican', visible: false},
         {category: 'thai', visible: false}]
 
-    // Let's define the categories here so that we don't have to hard code them in the html
-    // We will also use this array to get the filtered restaurants
-    // We are making the elements objects that store a visible property so that we can conditionally underline the 
     const [categories, setCategories] = useState([...defaultCategories])
 
     // We need to also adjust visibility of the featured and liked restaurants. We will do these via hooks
@@ -54,7 +53,7 @@ const FilterView = props => {
         userService.getLikes(props.user._id).then(res => {
             let likes = res;
             const arrofLikes = []
-            likes.forEach(like => arrofLikes.push({"id": like}));
+            likes.forEach(like => arrofLikes.unshift({"id": like}));
             setRests(arrofLikes);
         });
     }
