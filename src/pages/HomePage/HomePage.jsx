@@ -26,7 +26,7 @@ const HomePage = props => {
                     </div>
                 </div>
                 <div>
-                    <div className={styles.searchMessage}>Search Restaurants Around You!</div>
+                    <div className={styles.searchMessage}>Swipe in Custom Locations!</div>
                     <div className={styles.search}>
                         <div>
                             <LocationOnIcon style={{fontSize: 30}} />

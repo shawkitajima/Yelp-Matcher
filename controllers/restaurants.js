@@ -12,7 +12,6 @@ module.exports = {
 
 function restaurants(req, res) {
     User.findById(req.params.id, function(err, user) {
-        console.log(req.params.location);
         let url = `https://api.yelp.com/v3/businesses/search?term=restaurants&latitude=${req.params.lat}&longitude=${req.params.long}&open_now=true&limit=50&offset=${req.params.offset}`;
         if (req.params.location !== 'undefined') {
             url = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${req.params.location}&open_now=true&limit=50&offset=${req.params.offset}`;
@@ -28,8 +27,9 @@ function restaurants(req, res) {
         };
         function callback(error, response, body) {
             if (error) console.log(error);
+            let parsed = JSON.parse(body);
+            if (parsed.error && parsed.error.code === 'LOCATION_NOT_FOUND') res.send({message: 'invalid location'});
             if (!error && response.statusCode == 200) {
-                let parsed = JSON.parse(body);
                 let seen = new Set(user.seen);
                 let results = parsed.businesses.filter(rest => !seen.has(rest.id))
                 if (!results.length) {
