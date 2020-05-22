@@ -41,3 +41,19 @@
     width: 20.5%;
     margin-bottom: 5%;
 }
+
+.pageNum {
+    margin-top: -3.5%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40%;
+}
+
+.pageNum > div {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.pageNum > div:hover {
+    cursor: pointer;
+}

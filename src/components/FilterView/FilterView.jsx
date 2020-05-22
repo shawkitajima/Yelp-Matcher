@@ -11,6 +11,10 @@ const FilterView = props => {
     const { latitude, longitude } = usePosition();
     // This array will store all of the restaurants to be displayed.
     const [rests, setRests] = useState([]);
+
+    // We are going to allow users to view several pages of the results. Each page contains 4 overviews
+    const [pageCount, setPageCount] = useState(1);
+    const [pageNum, setPageNum] = useState(1);
     
     // Let's define the categories here so that we don't have to hard code them in the html
     // We will also use this array to get the filtered restaurants
@@ -29,6 +33,12 @@ const FilterView = props => {
     const [featureVis, setFeatureVis] = useState(true);
     const [likeVis, setLikeVis] = useState(false);
 
+    // Method to update the page count
+    const updatePageCount = res => {
+        setPageNum(1);
+        setPageCount(Math.ceil(res.length / 4));
+    }
+
     // Let's define methods that we will use to populate the rests array. We are looking for arrays of objects
     const getFeatured = () => {
         // Set visiblity
@@ -37,7 +47,10 @@ const FilterView = props => {
         setFeatureVis(true);
         setLikeVis(false);
         // Grab the data
-        restaurantService.restaurants(latitude, longitude, props.user._id).then(res => setRests(res));
+        restaurantService.restaurants(latitude, longitude, props.user._id).then(res => {
+            setRests(res)
+            updatePageCount(res);
+        });
     }
 
     // The getLikes method is the only method that returns an array of ids. The other methods return an array of objects.
@@ -55,6 +68,7 @@ const FilterView = props => {
             const arrofLikes = []
             likes.forEach(like => arrofLikes.unshift({"id": like}));
             setRests(arrofLikes);
+            updatePageCount(arrofLikes);
         });
     }
 
@@ -72,6 +86,7 @@ const FilterView = props => {
         // Grab the data
         restaurantService.filter(latitude, longitude, categories[idx].category).then(res => {
             setRests(res);
+            updatePageCount(res);
         });
     }
 
@@ -100,11 +115,18 @@ const FilterView = props => {
                     ))}
                 </div>
                 <div className={styles.overviews}>
-                        {rests.slice(0,4).map((rest, idx) => (
+                    {/* We are slicing the array because we only view 4 restaurants at a time */}
+                        {rests.slice((4 * pageNum) - 4, pageNum * 4).map((rest, idx) => (
                             <div key={idx}>
                                 <QuickOverview user={props.user} id={rest.id} />
                             </div>   
                         ))}
+                </div>
+                {/* This is where we can allow users to select "pages" of results */}
+                <div className={styles.pageNum}>
+                    {Array(pageCount).fill().map((elem, idx) => (
+                        <div onClick={() => setPageNum(idx + 1)} style={{color: pageNum === idx + 1 ? '#514949' : '#D2D2D2'}}  key={idx}>{(idx + 1).toString().padStart(2, '0')}</div>
+                    ))}
                 </div>
             </div>
         ) : (
