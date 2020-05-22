@@ -48,8 +48,9 @@ const FilterView = props => {
         setLikeVis(false);
         // Grab the data
         restaurantService.restaurants(latitude, longitude, props.user._id).then(res => {
-            setRests(res)
-            updatePageCount(res);
+            let featured = res.filter(rest => rest.rating >= 4);
+            setRests(featured)
+            updatePageCount(featured);
         });
     }
 
