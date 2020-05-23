@@ -147,7 +147,13 @@ const RestaurantDetailPage = props => {
                 <div className={styles.bottomHori}>
                     <div>
                         <h2>Location</h2>
-                        <img className={styles.mapImg} src={`https://maps.googleapis.com/maps/api/staticmap?center=${detail.coordinates.latitude},${detail.coordinates.longitude}&zoom=15&size=400x400&markers=color:blue%7Clabel:S%7C${detail.coordinates.latitude},${detail.coordinates.longitude}&key=AIzaSyAqXlmJCxRWZkIRpwD932Gl4vXk8WyCr6U`} alt="sorry"/>
+                    {props.location !== '0' ? (
+                            <img className={styles.mapImg} src={`https://maps.googleapis.com/maps/api/staticmap?center=${detail.coordinates.latitude},${detail.coordinates.longitude}&zoom=15&size=400x400&markers=color:blue%7Clabel:S%7C${detail.coordinates.latitude},${detail.coordinates.longitude}&key=AIzaSyAqXlmJCxRWZkIRpwD932Gl4vXk8WyCr6U`} alt="sorry"/>
+                        ) : (
+                            <iframe
+                                className={styles.mapImg} src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyAf1s9Gi3M1F9MwtNd1Xp_y1qfCnd-O-Dc&origin=${props.latitude},${props.longitude}&destination=${detail.coordinates.latitude},${detail.coordinates.longitude}&avoid=tolls|highways`} allowFullScreen>
+                            </iframe>
+                        )}
                         <p>{detail.location.address1}, {detail.location.city} {detail.location.zip_code}</p>
                         <p>{detail.display_phone}</p>
                     </div>

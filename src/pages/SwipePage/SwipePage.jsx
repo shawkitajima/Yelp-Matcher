@@ -62,7 +62,7 @@ const SwipePage = props => {
         {rests.message ? (
             <h1>Sorry, the location you entered is invalid</h1>
         ) : (
-            <RestaurantDetailPage id={rests[resIdx].id} like={like} moveNext={moveNext} user={props.user} friends={friends} swipe={true}/>
+            <RestaurantDetailPage id={rests[resIdx].id} like={like} moveNext={moveNext} user={props.user} friends={friends} swipe={true} latitude={latitude} longitude={longitude} location={location} />
         )}
         </>
     )
