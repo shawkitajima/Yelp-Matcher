@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { usePosition} from 'use-position';
 import restaurantService from '../../utils/restaurantService';
 import friendService from '../../utils/friendService';
 import userService from '../../utils/userService';
@@ -38,6 +39,8 @@ const RestaurantDetailPage = props => {
     const [message, setMessage] = useState('');
     const [severity, setSeverity] = useState('success');
     const [open, setOpen] = useState(false);
+
+    const { latitude, longitude } = usePosition();
 
     const today = new Date().getDay();
     
@@ -151,7 +154,7 @@ const RestaurantDetailPage = props => {
                             <img className={styles.mapImg} src={`https://maps.googleapis.com/maps/api/staticmap?center=${detail.coordinates.latitude},${detail.coordinates.longitude}&zoom=15&size=400x400&markers=color:blue%7Clabel:S%7C${detail.coordinates.latitude},${detail.coordinates.longitude}&key=AIzaSyAqXlmJCxRWZkIRpwD932Gl4vXk8WyCr6U`} alt="sorry"/>
                         ) : (
                             <iframe
-                                className={styles.mapImg} src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyAf1s9Gi3M1F9MwtNd1Xp_y1qfCnd-O-Dc&origin=${props.latitude},${props.longitude}&destination=${detail.coordinates.latitude},${detail.coordinates.longitude}&avoid=tolls|highways`} allowFullScreen>
+                                className={styles.mapImg} src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyAf1s9Gi3M1F9MwtNd1Xp_y1qfCnd-O-Dc&origin=${latitude},${longitude}&destination=${detail.coordinates.latitude},${detail.coordinates.longitude}&avoid=tolls|highways`} allowFullScreen>
                             </iframe>
                         )}
                         <p>{detail.location.address1}, {detail.location.city} {detail.location.zip_code}</p>
@@ -159,6 +162,7 @@ const RestaurantDetailPage = props => {
                     </div>
                     <div>
                         <h2>Hours</h2>
+                        <p>Unfortunately, due to the current Coronavirus pandemic, we cannot provide accurate hours at this time</p>
                         {/* HEYY */}
                         {/* {detail.hours[0].open.map((obj, idx) => (
                             <p key={idx}>{weekdays[obj.day]} &nbsp; {utilities.formatTime(obj.start)} - {utilities.formatTime(obj.end)}</p>

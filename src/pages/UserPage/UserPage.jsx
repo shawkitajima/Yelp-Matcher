@@ -274,44 +274,44 @@ const UserPage = props => {
       >
       <div className={classes.drawerHeader} />
           <Switch>
-              <Route exact path='/' render={() => (
-                  <HomePage user={props.user}/>
-              )
+              <Route exact path='/swipe/:location' render={({history}) => (
+                <SwipePage user={props.user} history={history}/>
+                )
               }/>
-              <Route exact path='/swipe/:location' render={() => (
-                  <SwipePage user={props.user}/>
-              )
-              }/>
-              <Route exact path='/likes' render={() => (
-                  <LikePage user={props.user} />
-              )
+              <Route exact path='/likes' render={({history}) => (
+                <LikePage user={props.user} history={history} />
+                )
               }/>
               <Route exact path='/friends' render={({history}) => (
-                  <FriendPage user={props.user} />
-              )
+                <FriendPage user={props.user} history={history} />
+                )
               }/>
               <Route exact path='/friendSearch' render={({history}) => (
-                  <FriendSearchPage user={props.user} />
-              )
+                <FriendSearchPage user={props.user} history={history} />
+                )
               }/>
               <Route exact path='/topLikes' render={({history}) => (
-                <TopLikesPage user={props.user} />
-              )
+                <TopLikesPage user={props.user} history={history} />
+                )
               }/>
               <Route exact path='/searchResults' render={({history}) => (
                 <SearchResultsPage />
-              )
+                )
               }/>
               <Route exact path='/detail/:id' render={({history}) => (
                 <NonSwipeDetailPage user={props.user} />
-              )
+                )
               }/>
               <Route exact path='/friendDetails/:id' render={({history}) => (
-                <FriendDetailPage user={props.user} />
-              )
+                <FriendDetailPage user={props.user} history={history} />
+                )
               }/>
               <Route exact path='/rejections' render={({history}) => (
-                <RejectionsPage user={props.user} />
+                <RejectionsPage user={props.user} history={history} />
+                )
+              }/>
+              <Route exact path='/' render={() => (
+                  <HomePage user={props.user}/>
               )
               }/>
           </Switch>

@@ -23,7 +23,7 @@ const NonSwipeDetailPage = props => {
 
 
     return (
-        <RestaurantDetailPage id={id} user={props.user} friends={friends} swipe={false} like={like}/>
+        <RestaurantDetailPage id={id} user={props.user} friends={friends} swipe={false} like={like} location={'0'}/>
     )
 };
 

@@ -49,16 +49,16 @@
 }
 
 .bottomHori>div:nth-child(1) {
-    width: 30%;
+    width: 25%;
 }
 
 .bottomHori>div:nth-child(2) {
     width: 25%;
-    margin-left: 5%;
 }
 
 .bottomHori>div:nth-child(3)>a {
     color: gray;
+    padding-right: 5%;
 }
 
 .starImg {
